@@ -1,0 +1,83 @@
+---
+title: 'STAT 423 Winter 2026 - Final Project'
+author: 'Krish Doshi, Lauren Yee, Kian Sharifzadeh'
+date: '`r Sys.Date()`'
+output:
+  pdf_document: default
+  html_document:
+    number_sections: true
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+```
+
+```{r data-cleanup}
+orig_data <- read.csv("billboard.csv")
+
+cleaned_data <- data.frame(rating=orig_data$overall_rating, age=orig_data$front_person_age)
+
+cleaned_data$gender <- ifelse(orig_data$artist_male == 1, "Male", "Not Male")
+
+cleaned_data$race <- ifelse(orig_data$artist_white == 1, "White", "Not White")
+
+cleaned_data$genre <- ifelse(is.na(orig_data$cdr_genre), "Genre Not Specified", orig_data$cdr_genre)
+
+cleaned_data$genre <- ifelse(grepl("Pop", orig_data$cdr_genre), "Pop", 
+                             ifelse(grepl("Country", orig_data$cdr_genre), "Country",
+                                    ifelse(grepl("Hip-Hop", orig_data$cdr_genre), "Hip-Hop",
+                                           ifelse(grepl("Rock", orig_data$cdr_genre), "Rock",
+                                                  ifelse(grepl("Jazz", orig_data$cdr_genre), "Jazz", "Other")))))
+
+cleaned_data <- cbind(cleaned_data, bpm=orig_data$bpm, energy=orig_data$energy, danceability = orig_data$danceability, happiness = orig_data$happiness, loudness_db = orig_data$loudness_d_b, length_sec = orig_data$length_sec)
+
+
+#Wind
+cleaned_data$has_winds <- ifelse(orig_data$clarinet, "True",
+                                 ifelse(orig_data$flute_piccolo, "True",
+                                        ifelse(orig_data$harmonica, "True",
+                                               ifelse(orig_data$kazoo, "True",
+                                                      ifelse(orig_data$ocarina, "True",
+                                                             ifelse(orig_data$saxophone, "True", 
+                                                            ifelse(orig_data$accordion, "True", "False")))))))
+
+
+#Brass
+cleaned_data$has_brass <- ifelse(orig_data$trumpet, "True", "False")
+
+#Percussion
+cleaned_data$has_percussion <- ifelse(orig_data$piano_keyboard_based, "True",
+                                 ifelse(orig_data$bongos, "True",
+                                        ifelse(orig_data$cowbell, "True",
+                                               ifelse(orig_data$handclaps_snaps, "True", "False"))))
+
+#Vocal or Whistle
+cleaned_data$has_vocal_or_whistle <- ifelse(orig_data$vocally_based, "True",
+                                 ifelse(orig_data$falsetto_vocal, "True",
+                                        ifelse(orig_data$human_whistling, "True", "False")))
+
+#String
+cleaned_data$has_strings <- ifelse(orig_data$bass_based, "True",
+                                 ifelse(orig_data$guitar_based, "True",
+                                        ifelse(orig_data$orchestral_strings, "True",
+                                               ifelse(orig_data$banjo, "True",
+                                                      ifelse(orig_data$mandolin, "True",
+                                                             ifelse(orig_data$pedal_lap_steel, "True",
+                                                              ifelse(orig_data$sitar, "True",
+                                                              ifelse(orig_data$ukulele, "True",
+                                                              ifelse(orig_data$violin, "True","False")))))))))
+
+
+cleaned_data$year <- as.numeric(substr(orig_data$date, 1, unlist(gregexpr("-", orig_data$date))[1] - 1))
+
+cutoff <- round(min(cleaned_data$year) + ((max(cleaned_data$year) - min(cleaned_data$year)) / 2))
+
+first_subpop <- cleaned_data[cleaned_data$year < cutoff, ]
+
+second_subpop <- cleaned_data[cleaned_data$year >= cutoff, ]
+
+
+```
