@@ -12,7 +12,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-
+library(MASS)
 ```
 
 ```{r data-cleanup}
@@ -93,8 +93,23 @@ summary(model_subpop1_1)
 ```
 
 ```{r}
+plot(model_subpop1_1, which = 1)
+plot(model_subpop1_1, which = 2)
+boxcox(model_subpop1_1, plotit=T)
+
+```
+
+```{r}
 model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
 summary(model_subpop1_2)
+
+```
+
+
+```{r}
+plot(model_subpop1_2, which = 1)
+plot(model_subpop1_2, which = 2)
+boxcox(model_subpop1_2, plotit=T)
 
 ```
 
@@ -111,6 +126,13 @@ summary(model_subpop2_1)
 ```
 
 ```{r}
+plot(model_subpop2_1, which = 1)
+plot(model_subpop2_1, which = 2)
+boxcox(model_subpop2_1, plotit=T)
+
+```
+
+```{r}
 model_subpop2_2 <- lm(data = second_subpop, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
 summary(model_subpop2_2)
 
@@ -118,7 +140,13 @@ summary(model_subpop2_2)
 
 ```{r}
 
+
 step(model_subpop2_2, direction="backward")
+
+plot(model_subpop2_2, which = 1)
+plot(model_subpop2_2, which = 2)
+boxcox(model_subpop2_2, plotit=T)
+
 
 ```
 
@@ -129,12 +157,20 @@ summary(model_total_1)
 ```
 
 ```{r}
+plot(model_total_1, which = 1)
+plot(model_total_1, which = 2)
+boxcox(model_total_1, plotit=T)
+
+```
+
+```{r}
 model_total_2 <- lm(data = cleaned_data, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
 summary(model_total_2)
 
 ```
 
 ```{r}
+
 
 step(model_total_2, direction="backward")
 
@@ -154,6 +190,13 @@ anova(model_subpop2_1, model_subpop2_2)
 
 ```{r}
 anova(model_total_1, model_total_2)
+
+```
+
+```{r}
+plot(model_total_2, which = 1)
+plot(model_total_2, which = 2)
+boxcox(model_total_2, plotit=T)
 
 ```
 
