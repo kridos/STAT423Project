@@ -18,7 +18,7 @@ library(tidyverse)
 ```{r data-cleanup}
 orig_data <- read.csv("billboard.csv")
 
-cleaned_data <- data.frame(rating=orig_data$overall_rating, age=orig_data$front_person_age)
+cleaned_data <- data.frame(artist = orig_data$artist, rating=orig_data$overall_rating, age=orig_data$front_person_age)
 
 cleaned_data$gender <- ifelse(orig_data$artist_male == 1, "Male", "Not Male")
 
@@ -73,11 +73,15 @@ cleaned_data$has_strings <- ifelse(orig_data$bass_based, "True",
 
 cleaned_data$year <- as.numeric(substr(orig_data$date, 1, unlist(gregexpr("-", orig_data$date))[1] - 1))
 
+cleaned_data <- cleaned_data[rowSums(is.na(cleaned_data)) == 0 , ]
+
 cutoff <- round(min(cleaned_data$year) + ((max(cleaned_data$year) - min(cleaned_data$year)) / 2))
 
 first_subpop <- cleaned_data[cleaned_data$year < cutoff, ]
 
 second_subpop <- cleaned_data[cleaned_data$year >= cutoff, ]
+
+
 
 
 ```
