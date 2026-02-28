@@ -139,9 +139,14 @@ summary(model_subpop2_2)
 ```
 
 ```{r}
-
-
 step(model_subpop2_2, direction="backward")
+
+```
+
+```{r}
+
+
+
 
 plot(model_subpop2_2, which = 1)
 plot(model_subpop2_2, which = 2)
