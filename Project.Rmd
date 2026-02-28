@@ -83,50 +83,45 @@ second_subpop <- cleaned_data[cleaned_data$year >= cutoff, ]
 
 
 
-#Test
-```
-
-```{r}
-model_1 <- lm(data = cleaned_data, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
-summary(model_1)
 
 ```
 
 ```{r}
-model_2 <- lm(data = cleaned_data, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
-summary(model_2)
+model_subpop1_1 <- lm(data = first_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
+summary(model_subpop1_1)
 
 ```
 
 ```{r}
-model_3 <- lm(data = cleaned_data, rating ~  energy + danceability + happiness + bpm + genre + has_winds + has_vocal_or_whistle + has_strings + has_percussion + has_brass + loudness_db + length_sec)
-summary(model_3)
+model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
+summary(model_subpop1_2)
 
 ```
 
 ```{r}
-model_4 <- lm(data = cleaned_data, rating ~ has_winds + has_vocal_or_whistle + has_strings + has_percussion + has_brass + has_winds*genre + has_winds*danceability + has_winds*happiness + has_winds*bpm + has_winds*loudness_db + has_winds*length_sec + has_vocal_or_whistle*genre + has_vocal_or_whistle*energy + has_vocal_or_whistle*danceability + has_vocal_or_whistle*happiness + has_vocal_or_whistle*bpm + has_vocal_or_whistle*loudness_db + has_vocal_or_whistle*length_sec + has_strings*genre +  has_strings*energy +  has_strings*danceability +  has_strings*happiness + has_strings*bpm + has_strings*loudness_db + has_strings*length_sec + has_percussion*genre + has_percussion*energy +  has_percussion*danceability +  has_percussion*happiness + has_percussion*bpm + has_percussion*loudness_db + has_percussion*length_sec + has_brass*genre + has_brass*energy +  has_brass*danceability +  has_brass*happiness + has_brass*bpm + has_brass*loudness_db + has_brass*length_sec)
-summary(model_4)
+model_subpop2_1 <- lm(data = second_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
+summary(model_subpop2_1)
 
 ```
 
 ```{r}
-model_5 <- lm(data = cleaned_data, rating ~  age + gender + race + energy + danceability + happiness + bpm + genre + has_winds + has_vocal_or_whistle + has_strings + has_percussion + has_brass + loudness_db + length_sec)
-summary(model_5)
+model_subpop2_2 <- lm(data = second_subpop, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
+summary(model_subpop2_2)
 
 ```
 
 ```{r}
-model_6 <- lm(data = cleaned_data, rating ~ age + race + gender + 
-              has_winds + has_vocal_or_whistle + has_strings + has_percussion + has_brass + 
-              has_winds*genre + has_winds*danceability + has_winds*happiness + has_winds*bpm + has_winds*loudness_db + has_winds*length_sec + 
-              has_vocal_or_whistle*genre + has_vocal_or_whistle*energy + has_vocal_or_whistle*danceability + has_vocal_or_whistle*happiness + has_vocal_or_whistle*bpm + has_vocal_or_whistle*loudness_db + has_vocal_or_whistle*length_sec + 
-              has_strings*genre +  has_strings*energy +  has_strings*danceability +  has_strings*happiness + has_strings*bpm + has_strings*loudness_db + has_strings*length_sec + 
-              has_percussion*genre + has_percussion*energy +  has_percussion*danceability +  has_percussion*happiness + has_percussion*bpm + has_percussion*loudness_db + has_percussion*length_sec + 
-              has_brass*genre + has_brass*energy +  has_brass*danceability +  has_brass*happiness + has_brass*bpm + has_brass*loudness_db + has_brass*length_sec + 
-              age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + 
-              race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec +
-               gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
-summary(model_6)
+model_total_1 <- lm(data = cleaned_data, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
+summary(model_total_1)
 
 ```
+
+```{r}
+model_total_2 <- lm(data = cleaned_data, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
+summary(model_total_2)
+
+```
+
+
+
+
