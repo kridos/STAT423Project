@@ -16,6 +16,8 @@ library(MASS)
 library(GGally)
 ```
 
+
+## Data Processing
 ```{r data-cleanup}
 orig_data <- read.csv("billboard.csv")
 
