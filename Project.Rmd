@@ -102,6 +102,18 @@ boxcox(model_subpop1_1, plotit=T)
 ```
 
 ```{r}
+step(model_subpop1_1, direction="backward")
+```
+
+```{r}
+new_model_1 <- lm(data = cleaned_data, log(rating) ~ age+ gender+ race + log(bpm) + genre*log(energy) + genre*log(danceability) + happiness +length_sec + loudness_db + has_brass + has_percussion  + has_vocal_or_whistle + year*log(energy) + age*genre)
+summary(new_model_1)
+
+```
+
+
+
+```{r}
 model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
 summary(model_subpop1_2)
 
@@ -117,6 +129,12 @@ boxcox(model_subpop1_2, plotit=T)
 
 ```{r}
 step(model_subpop1_2, direction="backward")
+```
+
+```{r}
+new_model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + genre + energy + danceability+ happiness + loudness_db + length_sec  + age*energy + age*danceability  + race*genre + race*length_sec + gender*genre + gender*energy + gender*danceability + gender*happiness  + gender*length_sec )
+summary(new_model_subpop1_2)
+
 ```
 
 ```{r}
