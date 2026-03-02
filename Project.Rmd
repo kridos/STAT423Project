@@ -83,10 +83,98 @@ first_subpop <- cleaned_data[cleaned_data$year < cutoff, ]
 
 second_subpop <- cleaned_data[cleaned_data$year >= cutoff, ]
 
+```
+
+```{r}
+model_results <- list()
+
+
+for(i in seq(1960, 2030, 10)){
+  decade_label <- paste0(i - 10, "s")
+
+  subpop <- subpop_60s <- cleaned_data[cleaned_data$year >= i - 10 & cleaned_data$year < i, ]
+  
+  # --- SAFETY CHECK 1: Ensure enough rows exist ---
+  # If you have < 50 rows, the interaction model will likely fail.
+  if(nrow(subpop) < 50) {
+    message(paste("Skipping", decade_label, "- Not enough data points."))
+    next
+  }
+  
+  factor_counts <- sapply(subpop[, c("genre", "gender", "race")], function(x) length(unique(na.omit(x))))
+  
+  if(any(factor_counts < 2)) {
+    message(paste("Skipping", decade_label, "due to single-level factor:", 
+                  names(factor_counts)[factor_counts < 2]))
+    next
+  }
+  
+  first_model <- lm(data = subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
+
+
+  
+  
+  
+  
+  
+  second_model <- lm(data = subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
+
+
+  
+
+  # --- Plotting (Wrapped in 'try' so one bad plot doesn't stop the whole loop) ---
+  try({
+    plot(first_model, which = 1:2)
+    boxcox(first_model, plotit=TRUE)
+    plot(second_model, which = 1:2)
+    boxcox(second_model, plotit=TRUE)
+  })
+  optimal_model <- step(second_model, direction="backward")
+  
+  model_results[[decade_label]] <- list(
+    "first"   = first_model,
+    "second"  = second_model,
+    "optimal" = optimal_model
+  )
+  
+  print(decade_label)
+  
+  summary(first_model)
+  
+  summary(second_model)
+  
+  summary(optimal_model)
+  
+}
+
 
 
 
 ```
+
+```{r}
+# Loop through each decade in the model_results list
+for (decade in names(model_results)) {
+  
+  # Check if the 'optimal' model exists for this decade
+  if (!is.null(model_results[[decade]]$optimal)) {
+    
+    cat("\n", "========================================", "\n")
+    cat("  SUMMARY FOR OPTIMAL MODEL:", decade, "\n")
+    cat("========================================", "\n")
+    
+    # Print the summary
+    print(summary(model_results[[decade]]$optimal))
+    
+  } else {
+    cat("\nNo optimal model found for:", decade, "\n")
+  }
+}
+
+
+
+```
+
 
 ## Models - Kian Sharifzadeh
 ```{r}
@@ -101,9 +189,6 @@ plot(model_subpop1_1, which = 2)
 boxcox(model_subpop1_1, plotit=T)
 ```
 
-```{r}
-step(model_subpop1_1, direction="backward")
-```
 
 ```{r}
 new_model_1 <- lm(data = cleaned_data, log(rating) ~ age+ gender+ race + log(bpm) + genre*log(energy) + genre*log(danceability) + happiness +length_sec + loudness_db + has_brass + has_percussion  + has_vocal_or_whistle + year*log(energy) + age*genre)
@@ -119,6 +204,13 @@ summary(model_subpop1_2)
 
 ```
 
+
+```{r}
+step(model_subpop1_2, direction="backward")
+```
+
+
+
 ```{r}
 #residual anaylsis plots for subpop 2
 plot(model_subpop1_2, which = 1)
@@ -127,15 +219,8 @@ boxcox(model_subpop1_2, plotit=T)
 
 ```
 
-```{r}
-step(model_subpop1_2, direction="backward")
-```
 
-```{r}
-new_model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + genre + energy + danceability+ happiness + loudness_db + length_sec  + age*energy + age*danceability  + race*genre + race*length_sec + gender*genre + gender*energy + gender*danceability + gender*happiness  + gender*length_sec )
-summary(new_model_subpop1_2)
 
-```
 
 ```{r}
 model_subpop2_1 <- lm(data = second_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
@@ -158,6 +243,8 @@ summary(model_subpop2_2)
 step(model_subpop2_2, direction="backward")
 
 ```
+
+
 
 ```{r}
 plot(model_subpop2_2, which = 1)
@@ -186,10 +273,10 @@ summary(model_total_2)
 
 ```{r}
 
-
 step(model_total_2, direction="backward")
 
 ```
+
 
 
 ```{r}
