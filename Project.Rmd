@@ -13,6 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(MASS)
+library(GGally)
 ```
 
 ```{r data-cleanup}
@@ -86,6 +87,37 @@ second_subpop <- cleaned_data[cleaned_data$year >= cutoff, ]
 
 ```
 
+### Total non-interaction (1958 - 2025)
+```{r}
+model_total_1 <- lm(data = cleaned_data, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
+summary(model_total_1)
+
+```
+
+```{r}
+plot(model_total_1, which = 1)
+plot(model_total_1, which = 2)
+boxcox(model_total_1, plotit=T)
+
+```
+
+
+### Total interaction (1958 - 2025)
+```{r}
+model_total_2 <- lm(data = cleaned_data, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
+summary(model_total_2)
+
+```
+
+```{r}
+plot(model_total_2, which = 1)
+plot(model_total_2, which = 2)
+boxcox(model_total_2, plotit=T)
+
+```
+
+### 1st Subpopulation non-interaction (1958 - 1991)
+
 ```{r}
 model_subpop1_1 <- lm(data = first_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
 summary(model_subpop1_1)
@@ -96,9 +128,11 @@ summary(model_subpop1_1)
 plot(model_subpop1_1, which = 1)
 plot(model_subpop1_1, which = 2)
 boxcox(model_subpop1_1, plotit=T)
-
+ggpairs(data = first_subpop, columns = 8:10)
 ```
 
+
+### 1st Subpopulation interaction (1958 - 1991)
 ```{r}
 model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
 summary(model_subpop1_2)
@@ -119,6 +153,8 @@ step(model_subpop1_2, direction="backward")
 
 ```
 
+
+### 2nd Subpopulation non-interaction (1992 - 2025)
 ```{r}
 model_subpop2_1 <- lm(data = second_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
 summary(model_subpop2_1)
@@ -132,6 +168,8 @@ boxcox(model_subpop2_1, plotit=T)
 
 ```
 
+
+### 2nd Subpopulation interaction (1992 - 2025)
 ```{r}
 model_subpop2_2 <- lm(data = second_subpop, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
 summary(model_subpop2_2)
@@ -155,24 +193,8 @@ boxcox(model_subpop2_2, plotit=T)
 
 ```
 
-```{r}
-model_total_1 <- lm(data = cleaned_data, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
-summary(model_total_1)
 
-```
 
-```{r}
-plot(model_total_1, which = 1)
-plot(model_total_1, which = 2)
-boxcox(model_total_1, plotit=T)
-
-```
-
-```{r}
-model_total_2 <- lm(data = cleaned_data, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
-summary(model_total_2)
-
-```
 
 ```{r}
 
@@ -198,12 +220,7 @@ anova(model_total_1, model_total_2)
 
 ```
 
-```{r}
-plot(model_total_2, which = 1)
-plot(model_total_2, which = 2)
-boxcox(model_total_2, plotit=T)
 
-```
 
 
 
