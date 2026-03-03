@@ -1,5 +1,22 @@
 ---
-title: "Final_Project_Report"
-output: html_document
+title: 'STAT 423 Winter 2026 - Final Project Report'
+author: 'Krish Doshi, Lauren Yee, Kian Sharifzadeh'
+date: '`r Sys.Date()`'
+output:
+  pdf_document: default
+  html_document:
+    number_sections: true
+  word_document: default
 ---
+Introduction
 
+Research Questions
+
+Methodology
+  - Model Description
+  - Tests
+  - Plots
+  - Transformations
+  - Important Findings
+
+Conclusion
