@@ -175,132 +175,6 @@ for (decade in names(model_results)) {
 
 ```
 
-
-## Models - Kian Sharifzadeh
-```{r}
-model_subpop1_1 <- lm(data = first_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
-summary(model_subpop1_1)
-```
-
-```{r}
-#residual anaylsis plots for subpop 1
-plot(model_subpop1_1, which = 1)
-plot(model_subpop1_1, which = 2)
-boxcox(model_subpop1_1, plotit=T)
-```
-
-
-```{r}
-new_model_1 <- lm(data = cleaned_data, log(rating) ~ age+ gender+ race + log(bpm) + genre*log(energy) + genre*log(danceability) + happiness +length_sec + loudness_db + has_brass + has_percussion  + has_vocal_or_whistle + year*log(energy) + age*genre)
-summary(new_model_1)
-
-```
-
-
-
-```{r}
-model_subpop1_2 <- lm(data = first_subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
-summary(model_subpop1_2)
-
-```
-
-
-```{r}
-step(model_subpop1_2, direction="backward")
-```
-
-
-
-```{r}
-#residual anaylsis plots for subpop 2
-plot(model_subpop1_2, which = 1)
-plot(model_subpop1_2, which = 2)
-boxcox(model_subpop1_2, plotit=T)
-
-```
-
-
-
-
-```{r}
-model_subpop2_1 <- lm(data = second_subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
-summary(model_subpop2_1)
-```
-
-```{r}
-plot(model_subpop2_1, which = 1)
-plot(model_subpop2_1, which = 2)
-boxcox(model_subpop2_1, plotit=T)
-```
-
-```{r}
-model_subpop2_2 <- lm(data = second_subpop, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
-summary(model_subpop2_2)
-
-```
-
-```{r}
-step(model_subpop2_2, direction="backward")
-
-```
-
-
-
-```{r}
-plot(model_subpop2_2, which = 1)
-plot(model_subpop2_2, which = 2)
-boxcox(model_subpop2_2, plotit=T)
-```
-
-```{r}
-model_total_1 <- lm(data = cleaned_data, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
-summary(model_total_1)
-
-```
-
-```{r}
-plot(model_total_1, which = 1)
-plot(model_total_1, which = 2)
-boxcox(model_total_1, plotit=T)
-
-```
-
-```{r}
-model_total_2 <- lm(data = cleaned_data, rating ~ age + gender + race +age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
-summary(model_total_2)
-
-```
-
-```{r}
-
-step(model_total_2, direction="backward")
-
-```
-
-
-
-```{r}
-anova(model_subpop1_1, model_subpop1_2)
-
-```
-
-```{r}
-anova(model_subpop2_1, model_subpop2_2)
-
-```
-
-
-```{r}
-anova(model_total_1, model_total_2)
-
-```
-
-```{r}
-plot(model_total_2, which = 1)
-plot(model_total_2, which = 2)
-boxcox(model_total_2, plotit=T)
-```
-
 ## Preliminary exploration of data through visual analysis
 
 ```{r}
@@ -310,8 +184,8 @@ ggplot(cleaned_data, aes(x = rating)) +
   geom_histogram(
     binwidth = 0.5,
     boundary = 0.5, 
-    fill = "blue",  
-    color = "black",
+    fill = "black",  
+    color = "grey",
     linewidth = 0.3
   ) +
   labs(
@@ -325,51 +199,69 @@ The histogram of ratings appears approximately symmetric and unimodal, resemblin
 
 ```{r}
 library(patchwork)
-p1 <- ggplot(first_subpop, aes(x = age, y = rating)) +
+plot_age <- ggplot(first_subpop, aes(x = age, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Age")
 
-p2 <- ggplot(first_subpop, aes(x = energy, y = rating)) +
+plot_race <- ggplot(first_subpop, aes(x = race, y = rating)) +
+  geom_point(color = "black", size = 1.5) +
+  geom_smooth(method = "lm", color = "red", se = F) +
+  theme_classic() +
+  ggtitle("Rating vs Race")
+
+plot_gender <- ggplot(first_subpop, aes(x = gender, y = rating)) +
+  geom_point(color = "black", size = 1.5) +
+  geom_smooth(method = "lm", color = "red", se = F) +
+  theme_classic() +
+  ggtitle("Rating vs Gender")
+
+plot_age + plot_race + plot_gender
+
+plot_genre <- ggplot(first_subpop, aes(x = genre, y = rating)) +
+  geom_point(color = "black", size = 1.5) +
+  geom_smooth(method = "lm", color = "red", se = F) +
+  theme_classic() +
+  ggtitle("Rating vs Genre")
+
+plot_energy <- ggplot(first_subpop, aes(x = energy, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Energy")
 
-p3 <- ggplot(first_subpop, aes(x = danceability, y = rating)) +
+plot_danceability <- ggplot(first_subpop, aes(x = danceability, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Danceability")
 
-p1 + p2 + p3
-
-p4 <- ggplot(first_subpop, aes(x = happiness, y = rating)) +
+plot_happiness <- ggplot(first_subpop, aes(x = happiness, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Happiness")
 
-p5 <- ggplot(first_subpop, aes(x = bpm, y = rating)) +
+plot_genre + plot_energy + plot_danceability + plot_happiness
+
+plot_bpm <- ggplot(first_subpop, aes(x = bpm, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs BPM")
 
-p6 <- ggplot(first_subpop, aes(x = loudness_db, y = rating)) +
+plot_loudness_db <- ggplot(first_subpop, aes(x = loudness_db, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
-  ggtitle("Rating vs Loudness")
+  ggtitle("Rating vs Loudness(db)")
 
-p4 + p5 + p6
-
-p7 <- ggplot(first_subpop, aes(x = length_sec, y = rating)) +
+plot_length_sec <- ggplot(first_subpop, aes(x = length_sec, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
-  ggtitle("Rating vs Song Length")
+  ggtitle("Rating vs Song Length(sec)")
 
-p7
+plot_bpm + plot_loudness_db + plot_length_sec
 ```
