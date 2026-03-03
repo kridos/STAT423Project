@@ -111,16 +111,7 @@ for(i in seq(1960, 2030, 10)){
   
   first_model <- lm(data = subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
 
-
-  
-  
-  
-  
-  
-  second_model <- lm(data = subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
-
-
-  
+  second_model <- lm(data = subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
 
   # --- Plotting (Wrapped in 'try' so one bad plot doesn't stop the whole loop) ---
   try({
@@ -146,10 +137,6 @@ for(i in seq(1960, 2030, 10)){
   summary(optimal_model)
   
 }
-
-
-
-
 ```
 
 ```{r}
@@ -174,79 +161,79 @@ for (decade in names(model_results)) {
 
 ## Preliminary Exploration of Data through Visual Analysis
 
-### Scatterplots of Individual Relationships
+### Plots of Individual Relationships
+
+The plots show the relationship between the predictors and the response variable, rating. 
 
 ```{r}
 library(ggplot2)
 library(patchwork)
-plot_age <- ggplot(first_subpop, aes(x = age, y = rating)) +
+plot_age <- ggplot(cleaned_data, aes(x = age, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Age")
 
-plot_race <- ggplot(first_subpop, aes(x = race, y = rating)) +
-  geom_point(color = "black", size = 1.5) +
-  geom_smooth(method = "lm", color = "red", se = F) +
-  theme_classic() +
-  ggtitle("Rating vs Race")
-
-plot_gender <- ggplot(first_subpop, aes(x = gender, y = rating)) +
-  geom_point(color = "black", size = 1.5) +
-  geom_smooth(method = "lm", color = "red", se = F) +
-  theme_classic() +
-  ggtitle("Rating vs Gender")
-
-plot_age + plot_race + plot_gender
-
-plot_genre <- ggplot(first_subpop, aes(x = genre, y = rating)) +
-  geom_point(color = "black", size = 1.5) +
-  geom_smooth(method = "lm", color = "red", se = F) +
-  theme_classic() +
-  ggtitle("Rating vs Genre")
-
-plot_energy <- ggplot(first_subpop, aes(x = energy, y = rating)) +
+plot_energy <- ggplot(cleaned_data, aes(x = energy, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Energy")
 
-plot_danceability <- ggplot(first_subpop, aes(x = danceability, y = rating)) +
+plot_danceability <- ggplot(cleaned_data, aes(x = danceability, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Danceability")
 
-plot_happiness <- ggplot(first_subpop, aes(x = happiness, y = rating)) +
+plot_happiness <- ggplot(cleaned_data, aes(x = happiness, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Happiness")
 
-plot_genre + plot_energy + plot_danceability + plot_happiness
+plot_age + plot_energy + plot_danceability + plot_happiness
 
-plot_bpm <- ggplot(first_subpop, aes(x = bpm, y = rating)) +
+plot_bpm <- ggplot(cleaned_data, aes(x = bpm, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs BPM")
 
-plot_loudness_db <- ggplot(first_subpop, aes(x = loudness_db, y = rating)) +
+plot_loudness_db <- ggplot(cleaned_data, aes(x = loudness_db, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Loudness(db)")
 
-plot_length_sec <- ggplot(first_subpop, aes(x = length_sec, y = rating)) +
+plot_length_sec <- ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
   ggtitle("Rating vs Song Length(sec)")
 
 plot_bpm + plot_loudness_db + plot_length_sec
-```
 
-The scatterplots show the relationship between the predictors and the response variable, rating. As expected, there is banding because they are discrete. 
+plot_race <- ggplot(cleaned_data, aes(x = race, y = rating, fill = race)) +
+  geom_boxplot() +
+  theme_classic() +
+  ggtitle("Rating vs Race") + 
+  guides(fill = "none")
+
+plot_gender <- ggplot(cleaned_data, aes(x = gender, y = rating, fill = gender)) +
+  geom_boxplot() +
+  theme_classic() +
+  ggtitle("Rating vs Gender") + 
+  guides(fill = "none")
+
+plot_genre <- ggplot(cleaned_data, aes(x = genre, y = rating, fill = genre)) +
+  geom_boxplot() +
+  theme_classic() +
+  ggtitle("Rating vs Genre")
+
+plot_race + plot_gender + plot_genre 
+```
+As expected, banding is observed in the scatterplots because the response variable, rating, is discrete. Since race, gender, and genre are categorical predictors, the relationship with rating is displayed by boxplots instead.
 
 ```{r}
 ggplot(cleaned_data, aes(x = rating)) +
@@ -266,6 +253,10 @@ ggplot(cleaned_data, aes(x = rating)) +
 ```
 However, the histogram of ratings appears approximately symmetric and unimodal, resembling a normal distribution. While the ratings are discrete (integer-valued) and there are many categorical predictors, the distribution spans multiple levels, creating a shape that approximates continuity. This supports the treating of rating as a continuous response variable in the regression analysis.
 
+### Plots of Grouped Relationships
+
+Data visualizations for grouped relationships help us examine whether relationships between predictors and ratings differ across categories. These plot justify the inclusion of categorical predictors in the regression models and help identify potential interaction effects.
+
 ```{r}
 model_60s <- model_results[["1960s"]]$optimal
 model_70s <- model_results[["1970s"]]$optimal
@@ -273,10 +264,27 @@ model_80s <- model_results[["1980s"]]$optimal
 model_90s <- model_results[["1990s"]]$optimal
 model_2000s <- model_results[["2000s"]]$optimal
 model_2010s <- model_results[["2010s"]]$optimal
-model_60s
-model_70s 
-model_80s 
-model_90s 
-model_2000s 
-model_2010s
 ```
+
+```{r}
+vars_by_decade <- lapply(model_results, function(x) {
+  attr(terms(x$optimal), "term.labels")
+})
+
+all_vars <- unique(unlist(vars_by_decade))
+
+presence_matrix <- sapply(vars_by_decade, function(vars) {
+  all_vars %in% vars
+})
+
+rownames(presence_matrix) <- all_vars
+presence_matrix
+
+rownames(presence_matrix)[rowSums(presence_matrix) == ncol(presence_matrix)]
+```
+```{r}
+ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
+  geom_smooth(aes(color = genre), method = "lm", se = FALSE) +
+  theme_minimal()
+```
+The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
