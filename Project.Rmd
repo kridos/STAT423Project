@@ -279,4 +279,23 @@ model_80s
 model_90s 
 model_2000s 
 model_2010s
+
+anova(model_results[["1960s"]]$first, model_60s)
+anova(model_60s, model_results[["1960s"]]$second)
+
+anova(model_results[["1970s"]]$first, model_70s)
+anova(model_70s, model_results[["1970s"]]$second)
+
+anova(model_results[["1980s"]]$first, model_80s)
+anova(model_80s, model_results[["1980s"]]$second)
+
+anova(model_results[["1990s"]]$first, model_90s)
+anova(model_90s, model_results[["1990s"]]$second)
+
+anova(model_results[["2000s"]]$first, model_2000s)
+anova(model_2000s, model_results[["2000s"]]$second)
+
+anova(model_results[["2010s"]]$first, model_2010s)
+anova(model_2010s, model_results[["2010s"]]$second)
 ```
+
