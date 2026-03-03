@@ -170,34 +170,14 @@ for (decade in names(model_results)) {
     cat("\nNo optimal model found for:", decade, "\n")
   }
 }
-
-
-
 ```
 
-## Preliminary exploration of data through visual analysis
+## Preliminary Exploration of Data through Visual Analysis
+
+### Scatterplots of Individual Relationships
 
 ```{r}
 library(ggplot2)
-
-ggplot(cleaned_data, aes(x = rating)) +
-  geom_histogram(
-    binwidth = 0.5,
-    boundary = 0.5, 
-    fill = "black",  
-    color = "grey",
-    linewidth = 0.3
-  ) +
-  labs(
-    title = "Histogram of Song Ratings",
-    x = "Rating",
-    y = "Frequency"
-  ) +
-  theme_classic()
-```
-The histogram of ratings appears approximately symmetric and unimodal, resembling a normal distribution. Although the ratings are discrete (integer-valued), the distribution spans multiple levels, creating a shape that approximates continuity. This supports the treating of rating as a continuous response variable in the regression analysis.
-
-```{r}
 library(patchwork)
 plot_age <- ggplot(first_subpop, aes(x = age, y = rating)) +
   geom_point(color = "black", size = 1.5) +
@@ -264,4 +244,39 @@ plot_length_sec <- ggplot(first_subpop, aes(x = length_sec, y = rating)) +
   ggtitle("Rating vs Song Length(sec)")
 
 plot_bpm + plot_loudness_db + plot_length_sec
+```
+
+The scatterplots show the relationship between the predictors and the response variable, rating. As expected, there is banding because they are discrete. 
+
+```{r}
+ggplot(cleaned_data, aes(x = rating)) +
+  geom_histogram(
+    binwidth = 0.5,
+    boundary = 0.5, 
+    fill = "black",  
+    color = "grey",
+    linewidth = 0.3
+  ) +
+  labs(
+    title = "Histogram of Song Ratings",
+    x = "Rating",
+    y = "Frequency"
+  ) +
+  theme_classic()
+```
+However, the histogram of ratings appears approximately symmetric and unimodal, resembling a normal distribution. While the ratings are discrete (integer-valued) and there are many categorical predictors, the distribution spans multiple levels, creating a shape that approximates continuity. This supports the treating of rating as a continuous response variable in the regression analysis.
+
+```{r}
+model_60s <- model_results[["1960s"]]$optimal
+model_70s <- model_results[["1970s"]]$optimal
+model_80s <- model_results[["1980s"]]$optimal
+model_90s <- model_results[["1990s"]]$optimal
+model_2000s <- model_results[["2000s"]]$optimal
+model_2010s <- model_results[["2010s"]]$optimal
+model_60s
+model_70s 
+model_80s 
+model_90s 
+model_2000s 
+model_2010s
 ```
