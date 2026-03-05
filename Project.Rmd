@@ -20,79 +20,44 @@ library(MASS)
 ```{r data-cleanup}
 orig_data <- read.csv("billboard.csv")
 
-cleaned_data <- data.frame(artist = orig_data$artist, rating = orig_data$overall_rating, age=orig_data$front_person_age)
+cleaned_data <- data.frame(artist = orig_data$artist, rating = orig_data$overall_rating, 
+  age=orig_data$front_person_age)
 
 cleaned_data$gender <- ifelse(orig_data$artist_male == 1, "Male", "Not Male")
 
 cleaned_data$race <- ifelse(orig_data$artist_white == 1, "White", "Not White")
 
-cleaned_data$genre <- ifelse(is.na(orig_data$cdr_genre), "Genre Not Specified", orig_data$cdr_genre)
+cleaned_data$genre <- ifelse(is.na(orig_data$cdr_genre), "Genre Not Specified", 
+    orig_data$cdr_genre)
 
 cleaned_data$genre <- ifelse(grepl("Pop", orig_data$cdr_genre), "Pop", 
-                             ifelse(grepl("Country", orig_data$cdr_genre), "Country",
-                                    ifelse(grepl("Hip-Hop", orig_data$cdr_genre), "Hip-Hop",
-                                           ifelse(grepl("Rock", orig_data$cdr_genre), "Rock",
-                                                  ifelse(grepl("Jazz", orig_data$cdr_genre), "Jazz", "Other")))))
+                      ifelse(grepl("Country", orig_data$cdr_genre), "Country",
+                      ifelse(grepl("Hip-Hop", orig_data$cdr_genre), "Hip-Hop",
+                      ifelse(grepl("Rock", orig_data$cdr_genre), "Rock",
+                      ifelse(grepl("Jazz", orig_data$cdr_genre), "Jazz", "Other")))))
 
-cleaned_data <- cbind(cleaned_data, bpm=orig_data$bpm, energy=orig_data$energy, danceability = orig_data$danceability, happiness = orig_data$happiness, loudness_db = orig_data$loudness_d_b, length_sec = orig_data$length_sec)
-
-
-#Wind
-cleaned_data$has_winds <- ifelse(orig_data$clarinet, "True",
-                                 ifelse(orig_data$flute_piccolo, "True",
-                                        ifelse(orig_data$harmonica, "True",
-                                               ifelse(orig_data$kazoo, "True",
-                                                      ifelse(orig_data$ocarina, "True",
-                                                             ifelse(orig_data$saxophone, "True", 
-                                                            ifelse(orig_data$accordion, "True", "False")))))))
+cleaned_data <- cbind(cleaned_data, bpm=orig_data$bpm, energy=orig_data$energy, 
+                danceability = orig_data$danceability, happiness = orig_data$happiness, 
+                loudness_db = orig_data$loudness_d_b, 
+                length_sec = orig_data$length_sec)
 
 
-#Brass
-cleaned_data$has_brass <- ifelse(orig_data$trumpet, "True", "False")
-
-#Percussion
-cleaned_data$has_percussion <- ifelse(orig_data$piano_keyboard_based, "True",
-                                 ifelse(orig_data$bongos, "True",
-                                        ifelse(orig_data$cowbell, "True",
-                                               ifelse(orig_data$handclaps_snaps, "True", "False"))))
-
-#Vocal or Whistle
-cleaned_data$has_vocal_or_whistle <- ifelse(orig_data$vocally_based, "True",
-                                 ifelse(orig_data$falsetto_vocal, "True",
-                                        ifelse(orig_data$human_whistling, "True", "False")))
-
-#String
-cleaned_data$has_strings <- ifelse(orig_data$bass_based, "True",
-                                 ifelse(orig_data$guitar_based, "True",
-                                        ifelse(orig_data$orchestral_strings, "True",
-                                               ifelse(orig_data$banjo, "True",
-                                                      ifelse(orig_data$mandolin, "True",
-                                                             ifelse(orig_data$pedal_lap_steel, "True",
-                                                              ifelse(orig_data$sitar, "True",
-                                                              ifelse(orig_data$ukulele, "True",
-                                                              ifelse(orig_data$violin, "True","False")))))))))
-
-
-cleaned_data$year <- as.numeric(substr(orig_data$date, 1, unlist(gregexpr("-", orig_data$date))[1] - 1))
+cleaned_data$year <- as.numeric(substr(orig_data$date, 1, 
+                    unlist(gregexpr("-", orig_data$date))[1] - 1))
 
 cleaned_data <- cleaned_data[rowSums(is.na(cleaned_data)) == 0 , ]
 
-cutoff <- round(min(cleaned_data$year) + ((max(cleaned_data$year) - min(cleaned_data$year)) / 2))
-
-first_subpop <- cleaned_data[cleaned_data$year < cutoff, ]
-
-second_subpop <- cleaned_data[cleaned_data$year >= cutoff, ]
-
 ```
 
-```{r}
+```{r results='hide'}
 model_results <- list()
 
 
 for(i in seq(1960, 2030, 10)){
   decade_label <- paste0(i - 10, "s")
 
-  subpop <- subpop_60s <- cleaned_data[cleaned_data$year >= i - 10 & cleaned_data$year < i, ]
+  subpop <- subpop_60s <- cleaned_data[cleaned_data$year >= i - 10 & 
+                          cleaned_data$year < i, ]
   
   # --- SAFETY CHECK 1: Ensure enough rows exist ---
   # If you have < 50 rows, the interaction model will likely fail.
@@ -101,7 +66,8 @@ for(i in seq(1960, 2030, 10)){
     next
   }
   
-  factor_counts <- sapply(subpop[, c("genre", "gender", "race")], function(x) length(unique(na.omit(x))))
+  factor_counts <- sapply(subpop[, c("genre", "gender", "race")], 
+                  function(x) length(unique(na.omit(x))))
   
   if(any(factor_counts < 2)) {
     message(paste("Skipping", decade_label, "due to single-level factor:", 
@@ -109,17 +75,23 @@ for(i in seq(1960, 2030, 10)){
     next
   }
   
-  first_model <- lm(data = subpop, rating ~ age + race + gender + genre + energy + danceability + happiness + bpm + loudness_db + length_sec)
+  first_model <- lm(data = subpop, rating ~ age + race + gender + genre + energy 
+                  + danceability + happiness + bpm + loudness_db + length_sec)
 
-  second_model <- lm(data = subpop, rating ~ age + gender + race + age*genre + age*energy + age*danceability + age*happiness + age*bpm + age*loudness_db + age*length_sec + race*genre + race*energy + race*danceability + race*happiness + race*bpm + race*loudness_db + race*length_sec + gender*genre + gender*energy + gender*danceability + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
+  second_model <- lm(data = subpop, rating ~ age + gender + race + age*genre 
+                + age*energy + age*danceability + age*happiness + age*bpm 
+                + age*loudness_db + age*length_sec + race*genre + race*energy 
+                + race*danceability + race*happiness + race*bpm + race*loudness_db 
+                + race*length_sec + gender*genre + gender*energy + gender*danceability 
+                + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
 
   # --- Plotting (Wrapped in 'try' so one bad plot doesn't stop the whole loop) ---
-  try({
-    plot(first_model, which = 1:2)
-    boxcox(first_model, plotit=TRUE)
-    plot(second_model, which = 1:2)
-    boxcox(second_model, plotit=TRUE)
-  })
+  # try({
+  #   plot(first_model, which = 1:2)
+  #   boxcox(first_model, plotit=TRUE)
+  #   plot(second_model, which = 1:2)
+  #   boxcox(second_model, plotit=TRUE)
+  # })
   optimal_model <- step(second_model, direction="backward")
   
   model_results[[decade_label]] <- list(
@@ -309,5 +281,19 @@ anova(model_2000s, model_results[["2000s"]]$second)
 
 anova(model_results[["2010s"]]$first, model_2010s)
 anova(model_2010s, model_results[["2010s"]]$second)
+```
+
+```{r}
+    #remove eval = FALSE option after filling in the blanks.
+    
+    ggplot(data = chickwts_ci)+
+      geom_segment( mapping = aes(x = lower, 
+                                  xend = upper,
+                                  y = feed,
+                                  yend = feed) ) +
+      labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
+               x = "Chicken Weight (g)") +
+      scale_x_continuous(breaks = seq(125, 375, 25))
+
 ```
 
