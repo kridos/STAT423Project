@@ -246,7 +246,6 @@ model_90s <- model_results[["1990s"]]$optimal
 model_2000s <- model_results[["2000s"]]$optimal
 model_2010s <- model_results[["2010s"]]$optimal
 
-model_60s
 ```
 
 ```{r}
