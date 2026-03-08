@@ -297,14 +297,6 @@ plot(model_2010s, which = 1:2, main = "2010s")
 
 
 ```
-
-
-```{r}
-ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
-  geom_smooth(aes(color = genre), method = "lm", se = FALSE) +
-  theme_minimal()
-```
-
 The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
 
 ```{r}
