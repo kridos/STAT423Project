@@ -285,6 +285,43 @@ coef_1990s <- tidy(model_90s, conf.int = TRUE) %>% mutate(decade = "1990s")
 coef_2000s <- tidy(model_2000s, conf.int = TRUE) %>% mutate(decade = "2000s")
 coef_2010s <- tidy(model_2010s, conf.int = TRUE) %>% mutate(decade = "2010s")
 
+
+#Appending Data not Represented
+#1960s
+coef_1960s <- rbind(coef_1960s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1960s"))
+
+#1970s
+coef_1970s <- rbind(coef_1970s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1970s"))
+
+#1980s
+coef_1980s <- rbind(coef_1980s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genreOther", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genreJazz", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genreRock", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genrePop", 0, 0, 0, 0, 0, 0, "1980s"))
+
+#1990s
+coef_1990s <- rbind(coef_1990s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genreOther", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genreJazz", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genreRock", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genrePop", 0, 0, 0, 0, 0, 0, "1990s"))
+
+
+#2000s
+coef_2000s <- rbind(coef_2000s, list("genreCountry", 0, 0, 0, 0, 0, 0, "2000s"))
+coef_2000s <- rbind(coef_2000s, list("genreJazz", 0, 0, 0, 0, 0, 0, "2000s"))
+
+#2010s
+coef_2010s <- rbind(coef_2010s, list("genreCountry", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genreOther", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genreJazz", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genreRock", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genrePop", 0, 0, 0, 0, 0, 0, "2010s"))
+
+
+
+
 coef_data <- bind_rows(
   coef_1960s,
   coef_1970s,
