@@ -86,21 +86,11 @@ for(i in seq(1960, 2030, 10)){
                 + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
   
 
-  anova(first_model, second_model)
-  # 
-  # if(anova(first_model, second_model)$"Pr(>F)"[2] < 0.1){
-  #    optimal_model <<- step(second_model, direction="backward")
-  # } else {
-  #     optimal_model <<- step(first_model, direction="backward")
-  # }
-
-  # --- Plotting (Wrapped in 'try' so one bad plot doesn't stop the whole loop) ---
-  # try({
-  #   plot(first_model, which = 1:2)
-  #   boxcox(first_model, plotit=TRUE)
-  #   plot(second_model, which = 1:2)
-  #   boxcox(second_model, plotit=TRUE)
-  # })
+  if(anova(first_model, second_model)$"Pr(>F)"[2] <= 0.1){
+     optimal_model <<- step(second_model, direction="backward")
+  } else {
+      optimal_model <<- step(first_model, direction="backward")
+  }
   
   
   model_results[[decade_label]] <- list(
@@ -306,7 +296,7 @@ anova(model_results[["1980s"]]$first, model_results[["1980s"]]$second)
 
 
 anova(model_results[["1990s"]]$first, model_results[["1990s"]]$second)
-anova(model_90s, )
+
 
 anova(model_results[["2000s"]]$first, model_2000s)
 anova(model_2000s, model_results[["2000s"]]$second)
