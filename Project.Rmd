@@ -257,6 +257,42 @@ rownames(presence_matrix)[rowSums(presence_matrix) == ncol(presence_matrix)]
 The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
 
 ```{r}
+library(broom)
+coef_1960s <- tidy(model_60s, conf.int = TRUE) %>% mutate(decade = "1960s")
+coef_1970s <- tidy(model_70s, conf.int = TRUE) %>% mutate(decade = "1970s")
+coef_1980s <- tidy(model_80s, conf.int = TRUE) %>% mutate(decade = "1980s")
+coef_1990s <- tidy(model_90s, conf.int = TRUE) %>% mutate(decade = "1990s")
+coef_2000s <- tidy(model_2000s, conf.int = TRUE) %>% mutate(decade = "2000s")
+coef_2010s <- tidy(model_2010s, conf.int = TRUE) %>% mutate(decade = "2010s")
+
+coef_data <- bind_rows(
+  coef_1960s,
+  coef_1970s,
+  coef_1980s,
+  coef_1990s,
+  coef_2000s,
+  coef_2010s
+)
+
+coef_data <- coef_data %>%
+  filter(term != "(Intercept)") %>%
+  filter(grepl("genre", term))
+
+coef_data$term <- gsub("genre", "", coef_data$term)
+
+ggplot(coef_data, aes(x = estimate, y = term, color = term)) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high), size = 0.8) +
+  facet_wrap(~ decade) +
+  theme_classic() +
+  labs(
+    title = "Genre Effects on Song Ratings by Decade",
+    x = "Coefficient Estimate",
+    y = "Genre"
+  )
+```
+
+```{r}
 model_60s
 model_70s 
 model_80s 
@@ -282,18 +318,3 @@ anova(model_2000s, model_results[["2000s"]]$second)
 anova(model_results[["2010s"]]$first, model_2010s)
 anova(model_2010s, model_results[["2010s"]]$second)
 ```
-
-```{r}
-    #remove eval = FALSE option after filling in the blanks.
-    
-    ggplot(data = chickwts_ci)+
-      geom_segment( mapping = aes(x = lower, 
-                                  xend = upper,
-                                  y = feed,
-                                  yend = feed) ) +
-      labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
-               x = "Chicken Weight (g)") +
-      scale_x_continuous(breaks = seq(125, 375, 25))
-
-```
-
