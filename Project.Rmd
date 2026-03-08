@@ -83,16 +83,15 @@ for(i in seq(1960, 2030, 10)){
                 + age*loudness_db + age*length_sec + race*genre + race*energy 
                 + race*danceability + race*happiness + race*bpm + race*loudness_db 
                 + race*length_sec + gender*genre + gender*energy + gender*danceability 
-                + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec )
+                + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
+  
 
-  # --- Plotting (Wrapped in 'try' so one bad plot doesn't stop the whole loop) ---
-  # try({
-  #   plot(first_model, which = 1:2)
-  #   boxcox(first_model, plotit=TRUE)
-  #   plot(second_model, which = 1:2)
-  #   boxcox(second_model, plotit=TRUE)
-  # })
-  optimal_model <- step(second_model, direction="backward")
+  if(anova(first_model, second_model)$"Pr(>F)"[2] <= 0.1){
+     optimal_model <<- step(second_model, direction="backward")
+  } else {
+      optimal_model <<- step(first_model, direction="backward")
+  }
+  
   
   model_results[[decade_label]] <- list(
     "first"   = first_model,
@@ -109,6 +108,14 @@ for(i in seq(1960, 2030, 10)){
   summary(optimal_model)
   
 }
+
+
+```
+
+```{r}
+library("GGally")
+ggpairs(data = cleaned_data[,c("energy", "danceability", "happiness", "loudness_db", "bpm", "length_sec" )])
+
 ```
 
 ```{r}
@@ -236,6 +243,8 @@ model_80s <- model_results[["1980s"]]$optimal
 model_90s <- model_results[["1990s"]]$optimal
 model_2000s <- model_results[["2000s"]]$optimal
 model_2010s <- model_results[["2010s"]]$optimal
+
+model_60s
 ```
 
 ```{r}
@@ -261,6 +270,7 @@ plot(model_80s, which = 1:2, main = "1980s")
 plot(model_90s, which = 1:2, main = "1990s")
 plot(model_2000s, which = 1:2, main = "2000s")
 plot(model_2010s, which = 1:2, main = "2010s")
+
 
 ```
 The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
@@ -309,17 +319,15 @@ model_90s
 model_2000s 
 model_2010s
 
-anova(model_results[["1960s"]]$first, model_60s)
-anova(model_60s, model_results[["1960s"]]$second)
+anova(model_results[["1960s"]]$first, model_results[["1960s"]]$second)
 
-anova(model_results[["1970s"]]$first, model_70s)
-anova(model_70s, model_results[["1970s"]]$second)
+anova(model_results[["1970s"]]$first, model_results[["1970s"]]$second)
 
-anova(model_results[["1980s"]]$first, model_80s)
-anova(model_80s, model_results[["1980s"]]$second)
+anova(model_results[["1980s"]]$first, model_results[["1980s"]]$second)
 
-anova(model_results[["1990s"]]$first, model_90s)
-anova(model_90s, model_results[["1990s"]]$second)
+
+anova(model_results[["1990s"]]$first, model_results[["1990s"]]$second)
+
 
 anova(model_results[["2000s"]]$first, model_2000s)
 anova(model_2000s, model_results[["2000s"]]$second)
