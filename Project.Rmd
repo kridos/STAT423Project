@@ -253,6 +253,15 @@ rownames(presence_matrix) <- all_vars
 presence_matrix
 
 rownames(presence_matrix)[rowSums(presence_matrix) == ncol(presence_matrix)]
+
+par(mfrow = c(1,2))
+plot(model_60s, which = 1:2, main = "1960s")
+plot(model_70s, which = 1:2, main = "1970s")
+plot(model_80s, which = 1:2, main = "1980s")
+plot(model_90s, which = 1:2, main = "1990s")
+plot(model_2000s, which = 1:2, main = "2000s")
+plot(model_2010s, which = 1:2, main = "2010s")
+
 ```
 ```{r}
 ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
@@ -291,14 +300,14 @@ anova(model_2010s, model_results[["2010s"]]$second)
 ```{r}
     #remove eval = FALSE option after filling in the blanks.
     
-    ggplot(data = chickwts_ci)+
-      geom_segment( mapping = aes(x = lower, 
-                                  xend = upper,
-                                  y = feed,
-                                  yend = feed) ) +
-      labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
-               x = "Chicken Weight (g)") +
-      scale_x_continuous(breaks = seq(125, 375, 25))
+    # ggplot(data = chickwts_ci)+
+    #   geom_segment( mapping = aes(x = lower, 
+    #                               xend = upper,
+    #                               y = feed,
+    #                               yend = feed) ) +
+    #   labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
+    #            x = "Chicken Weight (g)") +
+    #   scale_x_continuous(breaks = seq(125, 375, 25))
 
-    ```
+```
 
