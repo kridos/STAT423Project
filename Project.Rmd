@@ -248,6 +248,29 @@ model_2010s <- model_results[["2010s"]]$optimal
 
 ```
 
+
+
+```{r}
+summary(model_60s)$r.squared
+summary(model_60s)$adj.r.squared
+
+summary(model_70s)$r.squared
+summary(model_70s)$adj.r.squared
+
+summary(model_80s)$r.squared
+summary(model_80s)$adj.r.squared
+
+summary(model_90s)$r.squared
+summary(model_90s)$adj.r.squared
+
+summary(model_2000s)$r.squared
+summary(model_2000s)$adj.r.squared
+
+summary(model_2010s)$r.squared
+summary(model_2010s)$adj.r.squared
+```
+
+
 ```{r}
 vars_by_decade <- lapply(model_results, function(x) {
   attr(terms(x$optimal), "term.labels")
