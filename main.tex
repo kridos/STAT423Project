@@ -20,7 +20,7 @@
 }
 
 % --- Title Information ---
-\title{\textbf{Final Project Report: \\ Music Taste Over Time: \\How People Change Song Choices}}
+\title{\textbf{Final Project Report: \\ How Music Taste Changes Over Time}}
 \author{
     Lauren Yee \\
     Kian Sharifzadeh \\
@@ -34,9 +34,9 @@
 
 \maketitle
 \begin{abstract}
-\noindent Music has been a commonplace in daily life for ages, however, the way that people interpret music is very different. The
-\noindent 1960s were a very different time from present day and each person had very different tastes. In our case study, we are studying the billboards 
-\noindent top 100 between the 1960s and 
+\noindent Music has changed much over time and so have people's preferences for music. However, the question is
+\noindent can we still use the same factors to predict music preferences now as we did over half a century ago?
+\noindent 
 \noindent Write a concise summary of your project here (usually 150-250 words). It should state the research question, briefly describe the data, mention the primary linear regression models used, and summarize the key findings and conclusions.
 \end{abstract}
 
@@ -47,6 +47,21 @@
 % -------------------------------------------------------------------
 Introduce your research question and the motivation behind your study. Why is this topic interesting or important? State the primary objectives of your regression analysis. 
 
+We have 3 main research questions. They include: 
+
+    \begin{enumerate}
+        \item  How do demographic characteristics of the artist affect the overall rating of a song over time?
+    
+    \item How do song characteristics (provided by Spotify) affect the overall rating of a song over time?
+    
+   \item  Which demographics and song characteristics significantly impact the overall rating of a Billboard \#1 song over the 6 decades?
+\end{enumerate}
+
+We were interested in how music has changed over time and we thought separating our data into different time periods helps us 
+understand what characteristics truly impact the overall rating. We thought each decade had its own music taste, so we decided 
+to analyze the data based on each decade the hits were created.
+It is interesting to see how far music has gone over the years, as well as getting a better grasp of music taste in each decade.
+
 % -------------------------------------------------------------------
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
@@ -56,10 +71,18 @@ Describe the dataset you are using. Where did it come from? What are the observa
 Briefly explain the response variable ($Y$) and the main predictor variables ($X_i$). 
 
 % Example of an inline equation and bullet points
-Let $Y$ denote the target variable. The primary predictors are:
+Let $Y$ denote the overall rating of the song. The primary predictors are:
 \begin{itemize}
-    \item $X_1$: Description of predictor 1.
-    \item $X_2$: Description of predictor 2.
+    \item $X_1$: Age: Average age of the artist(s)
+    \item $X_2$: Gender: Gender of the artist (s)
+    \item $X_3$: Race: Race of the artist (s)
+    \item $X_4$: Genre: Type of genre of the song
+    \item $X_5$: Energy: Energy measure from Spotify (0-100) 
+    \item $X_6$: Danceability: Danceability measure from Spotify (0-100) 
+    \item $X_7$: Happiness: Happiness measure from Spotify (0-100)
+    \item $X_8$: Loudness_db: Loudness measured in decibels from Spotify
+    \item $X_9$: BPM: Beats per minute from Spotify
+    \item $X_10$: Length_sec: Length of the song in seconds
 \end{itemize}
 
 \subsection{Exploratory Analysis}

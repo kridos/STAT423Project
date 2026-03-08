@@ -15,8 +15,8 @@ library(tidyverse)
 library(MASS)
 ```
 
-
 ## Data Processing - Krish Doshi
+
 ```{r data-cleanup}
 orig_data <- read.csv("billboard.csv")
 
@@ -142,7 +142,7 @@ for (decade in names(model_results)) {
 
 ### Plots of Individual Relationships
 
-The plots show the relationship between the predictors and the response variable, rating. 
+The plots show the relationship between the predictors and the response variable, rating.
 
 ```{r}
 library(ggplot2)
@@ -212,6 +212,7 @@ plot_genre <- ggplot(cleaned_data, aes(x = genre, y = rating, fill = genre)) +
 
 plot_race + plot_gender + plot_genre 
 ```
+
 As expected, banding is observed in the scatterplots because the response variable, rating, is discrete. Since race, gender, and genre are categorical predictors, the relationship with rating is displayed by boxplots instead.
 
 ```{r}
@@ -230,6 +231,7 @@ ggplot(cleaned_data, aes(x = rating)) +
   ) +
   theme_classic()
 ```
+
 However, the histogram of ratings appears approximately symmetric and unimodal, resembling a normal distribution. While the ratings are discrete (integer-valued) and there are many categorical predictors, the distribution spans multiple levels, creating a shape that approximates continuity. This supports the treating of rating as a continuous response variable in the regression analysis.
 
 ### Plots of Grouped Relationships
@@ -273,6 +275,16 @@ plot(model_2010s, which = 1:2, main = "2010s")
 
 
 ```
+<<<<<<< HEAD
+=======
+
+```{r}
+ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
+  geom_smooth(aes(color = genre), method = "lm", se = FALSE) +
+  theme_minimal()
+```
+
+>>>>>>> 03d2b34cfe87f300efb4635aac868a72bedb5b70
 The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
 
 ```{r}
@@ -335,3 +347,20 @@ anova(model_2000s, model_results[["2000s"]]$second)
 anova(model_results[["2010s"]]$first, model_2010s)
 anova(model_2010s, model_results[["2010s"]]$second)
 ```
+<<<<<<< HEAD
+=======
+
+```{r}
+    #remove eval = FALSE option after filling in the blanks.
+    
+    # ggplot(data = chickwts_ci)+
+    #   geom_segment( mapping = aes(x = lower, 
+    #                               xend = upper,
+    #                               y = feed,
+    #                               yend = feed) ) +
+    #   labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
+    #            x = "Chicken Weight (g)") +
+    #   scale_x_continuous(breaks = seq(125, 375, 25))
+
+```
+>>>>>>> 03d2b34cfe87f300efb4635aac868a72bedb5b70
