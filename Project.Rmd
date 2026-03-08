@@ -296,9 +296,13 @@ coef_data <- bind_rows(
 
 coef_data <- coef_data %>%
   filter(term != "(Intercept)") %>%
-  filter(grepl("genre", term))
+  filter(grepl("^genre", term)) %>%
+  mutate(term = gsub("^genre", "", term))
 
-coef_data$term <- gsub("genre", "", coef_data$term)
+coef_data$term <- factor(
+  coef_data$term,
+  levels = c("Jazz","Pop","Rock","Country","HipHop","Other")
+)
 
 ggplot(coef_data, aes(x = estimate, y = term, color = term)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
