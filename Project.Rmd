@@ -326,23 +326,4 @@ anova(model_2000s, model_results[["2000s"]]$second)
 
 anova(model_results[["2010s"]]$first, model_2010s)
 anova(model_2010s, model_results[["2010s"]]$second)
-<<<<<<< HEAD
 ```
-=======
-```
-
-```{r}
-    #remove eval = FALSE option after filling in the blanks.
-    
-    # ggplot(data = chickwts_ci)+
-    #   geom_segment( mapping = aes(x = lower, 
-    #                               xend = upper,
-    #                               y = feed,
-    #                               yend = feed) ) +
-    #   labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
-    #            x = "Chicken Weight (g)") +
-    #   scale_x_continuous(breaks = seq(125, 375, 25))
-
-```
-
->>>>>>> d49fb88529927b51f00872d37861d97bde73b4ed
