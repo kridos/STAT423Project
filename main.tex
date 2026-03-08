@@ -1,0 +1,158 @@
+\documentclass[12pt]{article}
+
+% --- Packages ---
+\usepackage[margin=1in]{geometry} % Sets standard 1-inch margins
+\usepackage{amsmath, amssymb}     % Standard math packages
+\usepackage{graphicx}             % Required for inserting images
+\usepackage{float}                % Allows precise image placement using [H]
+\usepackage{booktabs}             % For professional-looking tables
+\usepackage{hyperref}             % Makes references and citations clickable
+\usepackage{setspace}             % Allows line spacing adjustments
+\usepackage{caption}              % Customizing captions for figures/tables
+
+% --- Setup hyperref ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+% --- Title Information ---
+\title{\textbf{Final Project Report: \\ Song Preference Over Time: \\How People Change Song Choices}}
+\author{
+    Lauren Yee \\
+    Kian Sharifzadeh \\
+    Krish Doshi\\
+    \vspace{0.3cm}
+    \textit{Stats 423: Applied Linear Regression}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+\noindent Music has been a commonplace in daily life for ages, however, the way that people interpret music is very different. The
+\noindent 1960s were a very different time from present day and each person had very different tastes. In our case study, we are studying the billboards 
+\noindent top 100 between the 1960s and 
+\noindent Write a concise summary of your project here (usually 150-250 words). It should state the research question, briefly describe the data, mention the primary linear regression models used, and summarize the key findings and conclusions.
+\end{abstract}
+
+\onehalfspacing % 1.5 spacing makes it easier for grading
+
+% -------------------------------------------------------------------
+\section{Introduction}
+% -------------------------------------------------------------------
+Introduce your research question and the motivation behind your study. Why is this topic interesting or important? State the primary objectives of your regression analysis. 
+
+% -------------------------------------------------------------------
+\section{Data Description and Exploratory Data Analysis (EDA)}
+% -------------------------------------------------------------------
+Describe the dataset you are using. Where did it come from? What are the observational units? 
+
+\subsection{Variables}
+Briefly explain the response variable ($Y$) and the main predictor variables ($X_i$). 
+
+% Example of an inline equation and bullet points
+Let $Y$ denote the target variable. The primary predictors are:
+\begin{itemize}
+    \item $X_1$: Description of predictor 1.
+    \item $X_2$: Description of predictor 2.
+\end{itemize}
+
+\subsection{Exploratory Analysis}
+Present initial findings from your EDA. You can reference figures like scatterplots or correlation matrices here (e.g., "As seen in Figure \ref{fig:scatter}...").
+
+% Example of inserting a figure
+\begin{figure}[htbp] 
+    \centering
+    \includegraphics[angle=270, width=0.7\textwidth]{IMG_2679.jpeg}
+    \caption{A descriptive caption explaining the plot.}
+    \label{fig:scatter} % Use this label to reference the figure in your text
+\end{figure}
+
+% -------------------------------------------------------------------
+\section{Methodology and Model Building}
+% -------------------------------------------------------------------
+Describe the models you fit to the data. 
+
+\subsection{Proposed Model}
+% Example of a standalone equation
+We fit a multiple linear regression model of the form:
+\begin{equation}
+    Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \dots + \beta_p X_{ip} + \epsilon_i
+    \label{eq:main_model}
+\end{equation}
+where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
+
+Explain how you selected your variables (e.g., stepwise selection, theoretical justification, handling of multicollinearity). If you used transformations (like taking the log of the response), explain why.
+
+% -------------------------------------------------------------------
+\section{Results and Diagnostics}
+% -------------------------------------------------------------------
+Present the results of your final model. 
+
+\subsection{Model Summary}
+% Example of a professional table
+Table \ref{tab:results} summarizes the estimated coefficients for our final model.
+
+\begin{table}[H]
+    \centering
+    \caption{Estimated Regression Coefficients and Significance}
+    \vspace{0.2cm} % Adds a little space between caption and table
+    \label{tab:results}
+    \begin{tabular}{lrlrr}
+        \toprule
+        \textbf{Predictor} & \textbf{Estimate} & \textbf{Std. Error} & \textbf{t-value} & \textbf{Pr($>|t|$)} \\
+        \midrule
+        (Intercept) & $12.45$ & $2.10$ & $5.93$ & $<0.001$ \\
+        $X_1$       & $3.12$  & $0.45$ & $6.93$ & $<0.001$ \\
+        $X_2$       & $-1.05$ & $0.30$ & $-3.50$ & $0.002$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Model Diagnostics}
+Assess the assumptions of linear regression (linearity, independence, homoscedasticity, normality of residuals). You should include residual plots or QQ-plots here to justify that your model assumptions hold (or discuss how they are violated).
+
+% -------------------------------------------------------------------
+\section{Discussion and Conclusion}
+% -------------------------------------------------------------------
+Summarize the main takeaways from your model in the context of the original problem. What do the coefficients mean in the real world? 
+
+Acknowledge the limitations of your study (e.g., potential omitted variable bias, non-representative sample) and suggest areas for future work.
+
+% -------------------------------------------------------------------
+\section*{References}
+% -------------------------------------------------------------------
+% Using a simple thebibliography environment for ease of use. 
+% For larger projects, students might prefer BibTeX.
+\begin{thebibliography}{9}
+\bibitem{textbook} 
+Author Name. 
+\textit{Title of the Textbook}. 
+Publisher, Year.
+
+\bibitem{dataset} 
+Dataset Creator. 
+``Title of the Dataset." 
+\textit{Source/URL}, Year.
+\end{thebibliography}
+
+% -------------------------------------------------------------------
+\newpage
+\appendix
+\section{Appendix: R/Python Code}
+% -------------------------------------------------------------------
+Paste your analysis code here. If you prefer, you can use the \texttt{verbatim} environment to format it as raw text:
+
+\begin{verbatim}
+# Example R Code
+model <- lm(Y ~ X1 + X2, data = mydata)
+summary(model)
+plot(model)
+\end{verbatim}
+
+\end{document}
