@@ -275,8 +275,7 @@ plot(model_2010s, which = 1:2, main = "2010s")
 
 
 ```
-<<<<<<< HEAD
-=======
+
 
 ```{r}
 ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
@@ -284,7 +283,6 @@ ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
   theme_minimal()
 ```
 
->>>>>>> 03d2b34cfe87f300efb4635aac868a72bedb5b70
 The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
 
 ```{r}
@@ -307,9 +305,13 @@ coef_data <- bind_rows(
 
 coef_data <- coef_data %>%
   filter(term != "(Intercept)") %>%
-  filter(grepl("genre", term))
+  filter(grepl("^genre", term)) %>%
+  mutate(term = gsub("^genre", "", term))
 
-coef_data$term <- gsub("genre", "", coef_data$term)
+coef_data$term <- factor(
+  coef_data$term,
+  levels = c("Jazz","Pop","Rock","Country","HipHop","Other")
+)
 
 ggplot(coef_data, aes(x = estimate, y = term, color = term)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
@@ -347,20 +349,3 @@ anova(model_2000s, model_results[["2000s"]]$second)
 anova(model_results[["2010s"]]$first, model_2010s)
 anova(model_2010s, model_results[["2010s"]]$second)
 ```
-<<<<<<< HEAD
-=======
-
-```{r}
-    #remove eval = FALSE option after filling in the blanks.
-    
-    # ggplot(data = chickwts_ci)+
-    #   geom_segment( mapping = aes(x = lower, 
-    #                               xend = upper,
-    #                               y = feed,
-    #                               yend = feed) ) +
-    #   labs(title = "95% Confidence Interval of Chicken Weight (g) vs Feed",
-    #            x = "Chicken Weight (g)") +
-    #   scale_x_continuous(breaks = seq(125, 375, 25))
-
-```
->>>>>>> 03d2b34cfe87f300efb4635aac868a72bedb5b70
