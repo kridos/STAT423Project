@@ -203,10 +203,19 @@ Present initial findings from your EDA. You can reference figures like scatterpl
 
 \subsection{Proposed Model}
 % Example of a standalone equation
-We fit a multiple linear regression model of the form:
+We chose the model that best explained the variability in overall ratings in its decade while still being penalized on complexity (best adjusted $R^2$ value).
+According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
+
+
+Therefore, we fit a multiple linear regression model of the form:
 \begin{equation}
-    Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \dots + \beta_p X_{ip} + \epsilon_i
-    \label{eq:main_model}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i4} + \beta_5 X_{i5} \\
+                  & + \beta_6 X_{i6} + \beta_7 X_{i7} + \beta_8 X_{i8} + \beta_9 X_{i9} + \beta_{10} X_{i10} + \beta_{11} X_{i13} \\
+                  & + \beta_{12} (X_{i3}X_{i4}) + \beta_{13} (X_{i3}X_{i7}) + \beta_{14} (X_{i3}X_{i6}) \\
+                  & + \beta_{15} (X_{i3}X_{i8}) + \beta_{16} (X_{i3}X_{i9}) + \beta_{17} (X_{i2}X_{i9}) \\
+                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i
+\end{aligned}
 \end{equation}
 where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
