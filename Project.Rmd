@@ -400,6 +400,7 @@ ggplot(coef_data, aes(x = estimate, y = term, color = term)) +
     y = "Genre"
   )
 ```
+Country will always be 0 since it is our reference level.
 
 ```{r}
 model_60s
