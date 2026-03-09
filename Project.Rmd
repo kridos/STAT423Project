@@ -56,7 +56,7 @@ model_results <- list()
 for(i in seq(1960, 2030, 10)){
   decade_label <- paste0(i - 10, "s")
 
-  subpop <- subpop_60s <- cleaned_data[cleaned_data$year >= i - 10 & 
+  subpop <- cleaned_data[cleaned_data$year >= i - 10 & 
                           cleaned_data$year < i, ]
   
   # --- SAFETY CHECK 1: Ensure enough rows exist ---
@@ -287,6 +287,33 @@ presence_matrix
 
 rownames(presence_matrix)[rowSums(presence_matrix) == ncol(presence_matrix)]
 
+presence_df <- as.data.frame(as.table(presence_matrix))
+
+ggplot(presence_df, aes(x = Var2, y = Var1, fill = Freq)) +
+  geom_tile() +
+  scale_fill_manual(values = c("black","#23DC6D")) +
+  labs(x = "Decade", y = "Variable", fill = "Included") +
+  theme_minimal()
+
+true_counts <- rowSums(presence_matrix)
+true_counts
+
+rownames(presence_matrix)[true_counts == max(true_counts)]
+
+false_counts <- rowSums(!presence_matrix)
+false_counts
+
+rownames(presence_matrix)[false_counts == max(false_counts)]
+
+summary_table <- data.frame(
+  TRUE_count = rowSums(presence_matrix),
+  FALSE_count = rowSums(!presence_matrix)
+)
+
+summary_table[order(-summary_table$TRUE_count), ]
+```
+
+```{r}
 par(mfrow = c(1,2))
 plot(model_60s, which = 1:2, main = "1960s")
 plot(model_70s, which = 1:2, main = "1970s")
@@ -294,8 +321,6 @@ plot(model_80s, which = 1:2, main = "1980s")
 plot(model_90s, which = 1:2, main = "1990s")
 plot(model_2000s, which = 1:2, main = "2000s")
 plot(model_2010s, which = 1:2, main = "2010s")
-
-
 ```
 The fitted regression lines indicate that the relationship between song length and rating varies by genre. In particular, certain genres (e.g., Other and Country) exhibit steeper positive slopes, while others (e.g., Rock and Pop) show weaker or slightly negative trends, suggesting a potential interaction between length and genre.
 
