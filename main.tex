@@ -80,6 +80,7 @@ Most of the data comes from facts about the song, Chris's interpretation about t
 
 \subsection{Variables}
 
+<<<<<<< Updated upstream
 Let $Y$ denote the overall rating of the song. Our predictors are:
 
 \begin{itemize} 
@@ -107,6 +108,78 @@ First we looked at the numeric predictors: energy, danceability, happiness, loud
 \includegraphics[width=0.75\textwidth]{scatterplots_numeric.png}
 \caption{Scatterplot Matrix for Numeric Predictors}
 \end{figure}
+=======
+% Example of an inline equation and bullet points
+\noindent Let $Y$ denote the overall rating of the song. The predictors are:
+
+\begin{itemize}
+    \item $X_1$: Age: Average age of the artist(s)
+    \item $X_2$: GenderNotMale: Whether any of the artists aren't male (1 if not male, 0 otherwise)
+    \item $X_3$: RaceWhite: Whether any of the artists are white (1 if white, 0 otherwise)
+    \item $X_4$: GenreJazz: Whether the song is jazz (1 if jazz, 0 otherwise)
+    \item $X_5$: GenreRock: Whether the song is rock (1 if rock, 0 otherwise)
+    \item $X_6$: GenrePop: Whether the song is pop (1 if pop, 0 otherwise)
+    \item $X_7$: GenreOther: Whether the song is a different genre (1 if not rock, pop, jazz or country and 0 otherwise)
+    \item $X_8$: Energy: Energy measure from Spotify (0-100) 
+    \item $X_9$: Danceability: Danceability measure from Spotify (0-100) 
+    \item $X_{10}$: Happiness: Happiness measure from Spotify (0-100)
+    \item $X_{11}$: Loudness\_db: Loudness measured in decibels from Spotify
+    \item $X_{12}$: BPM: Beats per minute from Spotify
+    \item $X_{13}$: Length\_sec: Length of the song in seconds
+\end{itemize}
+
+
+\subsection{Exploratory Analysis}
+First, we look at the numeric predictors: energy, danceability, happiness, loudness\_db, bpm, length\_sec, and age.
+
+\begin{subfigure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Scatterplots for Numeric Predictors.png}
+    \caption*{Figure 1: Scatterplot Matrix for Numeric Predictors}
+\end{subfigure}
+
+\noindent In Figure 1, the numeric predictors reveal several moderate correlations among audio characteristics. 
+\noindent In particular, energy has a positive correlation with happiness and loudness, and danceability shows a mild association with happiness. 
+\noindent In contrast, predictors such as BPM, song length, and age exhibit relatively weak relationships with the other predictors. 
+\noindent These observations suggest that some audio characteristics may capture similar musical attributes and thus, potential multicollinearity when performing linear regression.
+
+Next, we observe the individual relationships of the categorical predictors: race, gender, and genre. 
+
+\begin{subfigure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Boxplots of Categorical Predictors.png}
+    \caption*{Figure 2: Boxplots of Categorical Predictors}
+\end{subfigure}
+
+\noindent The boxplots show that song ratings are relatively similar across race and gender groups. 
+\noindent However, some variation appears across genres, with Jazz and Rock tending to have slightly higher median ratings compared to Pop and Country.
+
+\begin{subfigure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Histogram.png}
+    \caption*{Figure 3: Historgram of Song Ratings}
+\end{subfigure}
+
+\noindent Moreover, the overall rating variable is technically discrete, but the distribution is approximately symmetric and unimodal distribution, resembling a normal distribution. 
+\noindent Also, the variable takes on 30 values, which is more fine-grained in comparison to outcomes considered discrete such as binary, for example. 
+\noindent Thus, we treat it as a continuous variable for the purposes of this linear regression.
+
+\noindent Genre is a main topic of interest as it is one of the most common ways people distingush songs. 
+
+\begin{subfigure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{Genre Coeff Plot.png}
+    \caption*{Figure 4: Coefficient Esimates Over Time by Genre}
+\end{subfigure}
+
+\noindent Although the coefficient estimates suggest that genre is not a consistently significant predictor of ratings, 
+\noindent we continue exploring this relationship to determine whether particular genres contribute more strongly to song ratings in certain decades. 
+
+\noindent Overall, the exploratory analysis revealed potential multicollinearity among numeric predictors such as energy, happiness, loudness and danceability. 
+\noindent On the other hand, BPM, song length, and age showed relatively weak associations with the remaining predictors. 
+\noindent The boxplots displayed similar rating distributions across race and gender, with some variation across genres. 
+\noindent As a result, the data were divided into decades to better understand how these predictors influence song ratings across different musical eras.
+>>>>>>> Stashed changes
 
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
