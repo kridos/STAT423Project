@@ -65,8 +65,8 @@ from 1960-2010?
 
 Our interest in music inspired our group to investgate its distinction over time. This prompted dividing our data into different decades
 to group similar song eras together, allowing us to understand what characteristics truly impact the overall rating. Provided that music
-is vastly different in each generation, it is interesting to see what aspects of music and the artist allow us to predict how a song is rated.
-This study shows the historical differences between predictors and how aspects, such as society and race can affect how a song is rated.
+is vastly different in each generation, it is interesting to see what aspects of music and the artist predict how a song is rated.
+This study shows the historical differences between predictors and how aspects, such as trends and race can affect how a song is rated.
 
 % -------------------------------------------------------------------
 \section{Data Description and Exploratory Data Analysis (EDA)}
@@ -75,9 +75,9 @@ This study shows the historical differences between predictors and how aspects, 
 \textbf{Data Description:}
 
 \noindent This dataset includes information about every Number 1 song on the Billboard charts from 1958-2025. It was compiled
-by Chris Dalla Riva when he decided to listen to each number one hit song and track data related to each song in a dataset.
-Most of the data comes from facts about the song, Chris's interpretation about the song, or spotify data and ratings.
-The data helps with determining what factors lead to a specific song being on top of the billboards. It accounts
+by Chris Dalla Riva, who listened to each number one hit song and tracked data related to each song.
+Most of the data comes from facts about the song, Chris's interpretation about the song, or data and ratings from Spotify.
+The data helps with determining what factors lead to a specific song being on top of the billboards. It accounts for
 demographic data such as age, gender, and race, as well as looking at specific song statistics, such as energy.
 
 \subsection{Variables}
@@ -119,6 +119,15 @@ demographic data such as age, gender, and race, as well as looking at specific s
 \subsection{Exploratory Analysis}
 Present initial findings from your EDA. You can reference figures like scatterplots or correlation matrices here (e.g., "As seen in Figure \ref{fig:scatter}...").
 
+<<<<<<< HEAD
+First, we looked at the the numeric predictors: energy, danceability, happiness, loudness_db, bpm, length_sec, and age.
+
+\begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Scatterplots for Numeric Predictors.png}
+        \caption*{Figure 1: Scatterplot Matrix for Numeric Predictors}
+    \end{subfigure}
+=======
 % Example of inserting a figure
 % \begin{figure}[htbp] 
 %     \centering
@@ -126,6 +135,7 @@ Present initial findings from your EDA. You can reference figures like scatterpl
 %     \caption{A descriptive caption explaining the plot.}
 %     \label{fig:scatter} % Use this label to reference the figure in your text
 % \end{figure}
+>>>>>>> 17ae2b87ce25fd5aaa8a0bc5bc1ecec1c248b62f
 
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
@@ -205,7 +215,7 @@ Present initial findings from your EDA. You can reference figures like scatterpl
 
 \subsection{Proposed Model}
 % Example of a standalone equation
-We chose the model that best explained the variability in overall ratings in its decade while still being penalized on complexity (best adjusted $R^2$ value).
+We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
 
@@ -253,6 +263,8 @@ In the TA plot, we see that the residuals are mostly around 0, which justifies t
 Summarize the main takeaways from your model in the context of the original problem. What do the coefficients mean in the real world? 
 
 Acknowledge the limitations of your study (e.g., potential omitted variable bias, non-representative sample) and suggest areas for future work.
+
+
 
 % -------------------------------------------------------------------
 \section*{References}
