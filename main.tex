@@ -107,10 +107,10 @@ First, we look at the numeric predictors: energy, danceability, happiness, loudn
 \caption{Scatterplot Matrix for Numeric Predictors}
 \end{figure}
 
-\noindent In Figure 1, the numeric predictors reveal several moderate correlations among audio characteristics. 
+\noindent In Figure 1, the numeric predictors reveal several moderate correlations among song characteristics. 
 \noindent In particular, energy has a positive correlation with happiness and loudness, and danceability shows a mild association with happiness. 
 \noindent In contrast, predictors such as BPM, song length, and age exhibit relatively weak relationships with the other predictors. 
-\noindent These observations suggest that some audio characteristics may capture similar musical attributes and thus, potential multicollinearity when performing linear regression.
+\noindent These observations suggest that some song characteristics may capture similar musical attributes and thus, potential multicollinearity when performing linear regression.
 
 Next, we observe the individual relationships of the categorical predictors: race, gender, and genre. 
 
@@ -120,13 +120,13 @@ Next, we observe the individual relationships of the categorical predictors: rac
     \caption{Boxplots of Categorical Predictors}
 \end{figure}
 
-\noindent The boxplots show that song ratings are relatively similar across race and gender groups. 
+\noindent Figure 2 shows that song ratings are relatively similar across race and gender groups. 
 \noindent However, some variation appears across genres, with Jazz and Rock tending to have slightly higher median ratings compared to Pop and Country.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{Histogram.png}
-    \caption{Historgram of Song Ratings}
+    \caption{Histogram of Song Ratings}
 \end{figure}
 
 \noindent Moreover, the overall rating variable is technically discrete, but the distribution is approximately symmetric and unimodal distribution, resembling a normal distribution. 
@@ -141,7 +141,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
     \caption{Coefficient Esimates Over Time by Genre}
 \end{figure}
 
-\noindent Although the coefficient estimates suggest that genre is not a consistently significant predictor of ratings, 
+\noindent Although the coefficient estimates in Figure 4 suggest that genre is not a consistently significant predictor of ratings, 
 \noindent we continue exploring this relationship to determine whether particular genres contribute more strongly to song ratings in certain decades. 
 
 \noindent Overall, the exploratory analysis revealed potential multicollinearity among numeric predictors such as energy, happiness, loudness and danceability. 
@@ -230,6 +230,20 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \section{Results and Diagnostics}
 % -------------------------------------------------------------------
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Presence Matrix Plot.png}
+    \caption{Presence Matrix Table}
+\end{figure}
+
+\noindent Figure 7 visualizes the inclusion of predictors from each optimized model. The most optimal predictors were
+\noindent energy and happiness, appearing in five out of the six decades. The least optimal predictors were 
+\noindent race:energy, loudness\_db, bpm, age:danceability, race:happiness, race:bpm, race:length\_sec, gender:bpm.
+\noindent In other words, the predictors that for only one decade's optimized model were loudness\_db, bpm, and a few interaction terms.
+
+\noindent Additionally, the table provides insight into the structure of the models and the inconsistency of variable selection across decades.
+\nodndent Clearly, the 1960s and 2000s require many predictors, while the other decades rely on a few. 
+
 \begin{table}[H]
 \centering
 \begin{tabular}{lr}
@@ -251,7 +265,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \subsection{Proposed Model}
 % Example of a standalone equation
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
-According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
+According to the adjusted $R^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
 
 Therefore, we fit a multiple linear regression model of the form:
@@ -266,7 +280,10 @@ Therefore, we fit a multiple linear regression model of the form:
 \end{equation}
 where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
-\textbf{Explain how you selected your variables (e.g., stepwise selection, theoretical justification, handling of multicollinearity). If you used transformations (like taking the log of the response), explain why.}
+\noindent To narrow our scope, we focused on song characteristics, and artist's traits like age and gender. 
+\noindent We compared main and main + interaction effects models to determine if the full model had any substantial predictors. 
+\noindent If this was true, then we ran a backward stepwise selection process on the full model, and likewise with the reduced model.
+\noindent As shown in Figure 3, the distribution of the response variable is approximately normal, so a transformation is unnecessary. 
 
 \subsection{Model Summary}
 Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
