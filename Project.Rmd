@@ -100,16 +100,10 @@ for(i in seq(1960, 2030, 10)){
   )
   
   print(decade_label)
-  
   summary(first_model)
-  
   summary(second_model)
-  
   summary(optimal_model)
-  
 }
-
-
 ```
 
 ```{r}
@@ -412,6 +406,7 @@ ggplot(coef_data, aes(x = estimate, y = term, color = term)) +
     y = "Genre"
   )
 ```
+Country will always be 0 since it is our reference level.
 
 ```{r}
 model_60s

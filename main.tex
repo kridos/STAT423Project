@@ -1,32 +1,32 @@
 \documentclass[12pt]{article}
 
 % --- Packages ---
-\usepackage[margin=1in]{geometry} % Sets standard 1-inch margins
-\usepackage{amsmath, amssymb}     % Standard math packages
-\usepackage{graphicx}             % Required for inserting images
-\usepackage{float}                % Allows precise image placement using [H]
-\usepackage{booktabs}             % For professional-looking tables
-\usepackage{hyperref}             % Makes references and citations clickable
-\usepackage{setspace}             % Allows line spacing adjustments
-\usepackage{caption}              % Customizing captions for figures/tables
+\usepackage[margin=1in]{geometry}% Sets standard 1-inch margins
+\usepackage{amsmath,amssymb}% Standard math packages
+\usepackage{graphicx}% Required for inserting images
+\usepackage{float}% Allows precise image placement using [H]
+\usepackage{booktabs}% For professional-looking tables
+\usepackage{hyperref}% Makes references and citations clickable
+\usepackage{setspace}% Allows line spacing adjustments
+\usepackage{caption}% Customizing captions for figures/tables
 
 % --- Setup hyperref ---
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
     citecolor=blue,
 }
 
 % --- Title Information ---
-\title{\textbf{Final Project Report: \\ How Music Taste Changes Over Time}}
+\title{\textbf{Final Project Report:\\How Music Taste Changes Over Time}}
 \author{
-    Lauren Yee \\
-    Kian Sharifzadeh \\
+    Lauren Yee\\
+    Kian Sharifzadeh\\
     Krish Doshi\\
     \vspace{0.3cm}
-    \textit{Stats 423: Applied Linear Regression & ANOVA}
+    \textit{Stats 423: Applied Linear Regression $\&$ ANOVA}
 }
 \date{\today}
 
@@ -50,45 +50,71 @@
 % -------------------------------------------------------------------
 \section{Introduction}
 % -------------------------------------------------------------------
-Introduce your research question and the motivation behind your study. Why is this topic interesting or important? State the primary objectives of your regression analysis. 
 
-We have 3 main research questions. They include: 
+\textbf{Research Questions:} 
 
-    \begin{enumerate}
-    \item  How do demographic characteristics of the artist affect the overall rating of a song over time?
+\begin{enumerate}
+    \item What are the most and least optimal predictors over time 
+from 1960-2010? 
+    \item How do the models stay consistent and how do they change?
+    \item How does the predictive power of the predictors change over time and what model has the best?
     
-    \item How do song characteristics (provided by Spotify) affect the overall rating of a song over time?
-    
-   \item  Which demographics and song characteristics significantly impact the overall rating of a Billboard \#1 song over the 6 decades?
 \end{enumerate}
 
-We were interested in how music has changed over time and we thought separating our data into different time periods helps us 
-understand what characteristics truly impact the overall rating. We thought each decade had its own music taste, so we decided 
-to analyze the data based on each decade the hits were created.
-It is interesting to see how far music has gone over the years, as well as getting a better grasp of music taste in each decade.
+
+
+Our interest in music inspired our group to investgate its distinction over time. This prompted dividing our data into different decades
+to group similar song eras together, allowing us to understand what characteristics truly impact the overall rating. Provided that music
+is vastly different in each generation, it is interesting to see what aspects of music and the artist allow us to predict how a song is rated.
+This study shows the historical differences between predictors and how aspects, such as society and race can affect how a song is rated.
 
 % -------------------------------------------------------------------
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
-Describe the dataset you are using. Where did it come from? What are the observational units? 
+
+\textbf{Data Description:}
+
+\noindent This dataset includes information about every Number 1 song on the Billboard charts from 1958-2025. It was compiled
+by Chris Dalla Riva when he decided to listen to each number one hit song and track data related to each song in a dataset.
+Most of the data comes from facts about the song, Chris's interpretation about the song, or spotify data and ratings.
+The data helps with determining what factors lead to a specific song being on top of the billboards. It accounts
+demographic data such as age, gender, and race, as well as looking at specific song statistics, such as energy.
 
 \subsection{Variables}
-Briefly explain the response variable ($Y$) and the main predictor variables ($X_i$). 
 
 % Example of an inline equation and bullet points
-Let $Y$ denote the overall rating of the song. The primary predictors are:
+\noindent Let $Y$ denote the overall rating of the song. The primary features are:
+\begin{itemize}
+    \item Age: Average age of the artist(s)
+    \item Gender: Gender of the artist(s)
+    \item Race: Race of the artist(s)
+    \item Genre: Type of genre of the song
+    \item Energy: Energy measure from Spotify (0-100) 
+    \item Danceability: Danceability measure from Spotify (0-100) 
+    \item Happiness: Happiness measure from Spotify (0-100)
+    \item Loudness\_db: Loudness measured in decibels from Spotify
+    \item BPM: Beats per minute from Spotify
+    \item Length\_sec: Length of the song in seconds
+\end{itemize}
+
+\noindent However, in our models, the predictors are split into:
+
 \begin{itemize}
     \item $X_1$: Age: Average age of the artist(s)
-    \item $X_2$: Gender: Gender of the artist (s)
-    \item $X_3$: Race: Race of the artist (s)
-    \item $X_4$: Genre: Type of genre of the song
-    \item $X_5$: Energy: Energy measure from Spotify (0-100) 
-    \item $X_6$: Danceability: Danceability measure from Spotify (0-100) 
-    \item $X_7$: Happiness: Happiness measure from Spotify (0-100)
-    \item $X_8$: Loudness_db: Loudness measured in decibels from Spotify
-    \item $X_9$: BPM: Beats per minute from Spotify
-    \item $X_10$: Length_sec: Length of the song in seconds
+    \item $X_2$: GenderNotMale: Whether any of the artists aren't male (1 if not male, 0 otherwise)
+    \item $X_3$: RaceWhite: Whether any of the artists are white (1 if white, 0 otherwise)
+    \item $X_4$: GenreJazz: Whether the song is jazz (1 if jazz, 0 otherwise)
+    \item $X_5$: GenreRock: Whether the song is rock (1 if rock, 0 otherwise)
+    \item $X_6$: GenrePop: Whether the song is pop (1 if pop, 0 otherwise)
+    \item $X_7$: GenreOther: Whether the song is a different genre (1 if not rock, pop, jazz or country and 0 otherwise)
+    \item $X_8$: Energy: Energy measure from Spotify (0-100) 
+    \item $X_9$: Danceability: Danceability measure from Spotify (0-100) 
+    \item $X_{10}$: Happiness: Happiness measure from Spotify (0-100)
+    \item $X_{11}$: Loudness\_db: Loudness measured in decibels from Spotify
+    \item $X_{12}$: BPM: Beats per minute from Spotify
+    \item $X_{13}$: Length\_sec: Length of the song in seconds
 \end{itemize}
+
 
 \subsection{Exploratory Analysis}
 Present initial findings from your EDA. You can reference figures like scatterplots or correlation matrices here (e.g., "As seen in Figure \ref{fig:scatter}...").
@@ -104,14 +130,94 @@ Present initial findings from your EDA. You can reference figures like scatterpl
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
 % -------------------------------------------------------------------
-Describe the models you fit to the data. 
+
+\textbf{\underline{Model Fitting Procedure}}
+
+\begin{enumerate}
+  \item Fit a main effects and interaction effects model to predict the decade's overall song ratings
+  using the variables states above
+  \item Determine whether the interaction effects model included substatial predictors that weren't
+  included in our main effects model by running an anova test and interpretting the p-value (at a signficance
+  level of 0.1)
+  \item If the p-value was significant, then run a backwards step procedure on the interaction effects model
+  to remove insignificant predictors based on the change in AIC per step. Otherwise, run the backwards step
+  procedure on the main effects model.
+  \item Repeat the previous steps for each decade to acquire the optimized models
+\end{enumerate}
+
+\textbf{\underline{1960s Model}}
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i4} + \beta_5 X_{i5} \\
+                  & + \beta_6 X_{i6} + \beta_7 X_{i7} + \beta_8 X_{i8} + \beta_9 X_{i9} + \beta_{10} X_{i10} + \beta_{11} X_{i13} \\
+                  & + \beta_{12} (X_{i3}X_{i4}) + \beta_{13} (X_{i3}X_{i7}) + \beta_{14} (X_{i3}X_{i6}) \\
+                  & + \beta_{15} (X_{i3}X_{i8}) + \beta_{16} (X_{i3}X_{i9}) + \beta_{17} (X_{i2}X_{i9}) \\
+                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i
+\end{aligned}
+\label{eq:60s_model}
+\end{equation}
+
+\textbf{\underline{1970s Model}}
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i3} + \beta_3 X_{i4} + \beta_4 X_{i5} \\
+                  & + \beta_5 X_{i6} + \beta_6 X_{i7} + \beta_{7} X_{i13} + \epsilon_i
+\end{aligned}
+\label{eq:70s_model}
+\end{equation}
+
+\textbf{\underline{1980s Model}}
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i8} + \beta_2 X_{i9} + \beta_3 X_{i10} + \epsilon_i
+\end{aligned}
+\label{eq:80s_model}
+\end{equation}
+
+\textbf{\underline{1990s Model}}
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i2} + \beta_2 X_{i3} + \beta_3 X_{i8} + \beta_4 X_{i10} + \beta_{5} X_{i11} + \epsilon_i
+\end{aligned}
+\label{eq:90s_model}
+\end{equation}
+
+\textbf{\underline{2000s Model}}
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i5} \\
+                  & + \beta_5 X_{i6} + \beta_6 X_{i7} + \beta_7 X_{i8} + \beta_8 X_{i9} + \beta_{9} X_{i10} + \beta_{10} X_{i12}\\
+                  & + \beta_{11} X_{i13} + \beta_{12} (X_{i1}X_{i9}) + \beta_{13} (X_{i3}X_{i7})\\
+                  & + \beta_{14} (X_{i3}X_{i9}) + \beta_{15} (X_{i3}X_{i10}) + \beta_{16} (X_{i3}X_{i12}) \\
+                  & + \beta_{17} (X_{i3}X_{i13}) + \beta_{18} (X_{i2}X_{i9}) + \beta_{19} (X_{i2}X_{i10}) \\
+                  & + \beta_{20} (X_{i2}X_{i12}) + \epsilon_i
+\end{aligned}
+\label{eq:2000s_model}
+\end{equation}
+
+\textbf{\underline{2010s Model}}
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i2} + \beta_2 X_{i8} + \beta_3 X_{i10} + \beta_4 X_{i13} + \epsilon_i
+\end{aligned}
+\label{eq:2010s_model}
+\end{equation}
 
 \subsection{Proposed Model}
 % Example of a standalone equation
-We fit a multiple linear regression model of the form:
+We chose the model that best explained the variability in overall ratings in its decade while still being penalized on complexity (best adjusted $R^2$ value).
+According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
+
+
+Therefore, we fit a multiple linear regression model of the form:
 \begin{equation}
-    Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \dots + \beta_p X_{ip} + \epsilon_i
-    \label{eq:main_model}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i4} + \beta_5 X_{i5} \\
+                  & + \beta_6 X_{i6} + \beta_7 X_{i7} + \beta_8 X_{i8} + \beta_9 X_{i9} + \beta_{10} X_{i10} + \beta_{11} X_{i13} \\
+                  & + \beta_{12} (X_{i3}X_{i4}) + \beta_{13} (X_{i3}X_{i7}) + \beta_{14} (X_{i3}X_{i6}) \\
+                  & + \beta_{15} (X_{i3}X_{i8}) + \beta_{16} (X_{i3}X_{i9}) + \beta_{17} (X_{i2}X_{i9}) \\
+                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i
+\end{aligned}
 \end{equation}
 where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
@@ -120,31 +226,62 @@ Explain how you selected your variables (e.g., stepwise selection, theoretical j
 % -------------------------------------------------------------------
 \section{Results and Diagnostics}
 % -------------------------------------------------------------------
-Present the results of your final model. 
+Since the 1960s model had the highest adjusted $R^2$ value, we will use present the results of that model and use as our final model.
 
 \subsection{Model Summary}
 % Example of a professional table
-Table \ref{tab:results} summarizes the estimated coefficients for our final model.
 
-\begin{table}[H]
+\begin{figure}[H] 
     \centering
-    \caption{Estimated Regression Coefficients and Significance}
-    \vspace{0.2cm} % Adds a little space between caption and table
-    \label{tab:results}
-    \begin{tabular}{lrlrr}
-        \toprule
-        \textbf{Predictor} & \textbf{Estimate} & \textbf{Std. Error} & \textbf{t-value} & \textbf{Pr($>|t|$)} \\
-        \midrule
-        (Intercept) & $12.45$ & $2.10$ & $5.93$ & $<0.001$ \\
-        $X_1$       & $3.12$  & $0.45$ & $6.93$ & $<0.001$ \\
-        $X_2$       & $-1.05$ & $0.30$ & $-3.50$ & $0.002$ \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+    \includegraphics[angle=0, width=0.4\textwidth]{1960s_Model.png}
+    \caption*{Figure 1: Summary of 1960's Optimized Model}
+\end{figure}
+
+The summary statistics from the 1960's model reveals that... 
+
 
 \subsection{Model Diagnostics}
 Assess the assumptions of linear regression (linearity, independence, homoscedasticity, normality of residuals). You should include residual plots or QQ-plots here to justify that your model assumptions hold (or discuss how they are violated).
+\begin{figure}[H]
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{1960s_TA_QQ_Plots.png}
+        \caption*{Figure 2: 1960's TA and QQ-Plot}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{1970s_Plots.png}
+        \caption*{Figure 3: 1970's TA and QQ-Plot}
+    \end{subfigure}
+    
+    \vspace{0.3cm}
+    
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{1980s_Plots.png}
+        \caption*{Figure 4: 1980's TA and QQ-Plot}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{1990s_Plots.png}
+        \caption*{Figure 5: 1990's TA and QQ-Plot}
+    \end{subfigure}
+    
+    \vspace{0.3cm}
+    
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{2000s_Plots.png}
+        \caption*{Figure 6: 2000's TA and QQ-Plot}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{2010s_Plots.png}
+        \caption*{Figure 6: 2010's TA and QQ-Plot}
+    \end{subfigure}
+\end{figure}
 
+The figures above represent the TA and QQ-plots for each of the optimized models over the six decades tested. In all of our TA plots, we see that the residuals are mostly around 0. While we noticed a small increase in residuals in the 2000's model, we did not deem it enough to be considered an issue. This is an indicator that the homoscedasticity assumption has been met throughout all the optimized models. With the QQ plots, we noticed that the tails are somewhat short-tailed on both ends for some of our optimized models, specifically for the 2000's and 2010's models. Similarly to what was mentioned for our TA plots, we thought that the normality condition is still met because most of the points on the QQ plots for each decade do not deviate from the reference line. Given the large amount of data and the conditions being met, we thought that it was unnecessary to perform a transformation.
 % -------------------------------------------------------------------
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
