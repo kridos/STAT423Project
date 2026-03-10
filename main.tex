@@ -52,7 +52,7 @@ while the factors that predict song ratings change over time, they have the pote
 
 \onehalfspacing
  
-{\scriptsize First authorship: }
+{\scriptsize First authorship: Krish}
 % -------------------------------------------------------------------
 \section{Introduction}
 % -------------------------------------------------------------------
@@ -240,7 +240,6 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \section{Results and Diagnostics}
 % -------------------------------------------------------------------
 
-<<<<<<< HEAD
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{Presence Matrix Plot.png}
@@ -253,13 +252,12 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \noindent In other words, the predictors that for only one decade's optimized model were loudness\_db, bpm, and a few interaction terms.
 
 \noindent Additionally, the table provides insight into the structure of the models and the inconsistency of variable selection across decades.
-\nodndent Clearly, the 1960s and 2000s require many predictors, while the other decades rely on a few. 
+\noindent Clearly, the 1960s and 2000s require many predictors, while the other decades rely on a few. 
 
-=======
-
+{\scriptsize First authorship: Lauren}
 
 \subsection{Proposed Model}
->>>>>>> 89e3986b69be2068d2bf2ae16d8e71a5da0aceac
+
 \begin{table}[H]
 \centering
 \begin{tabular}{lr}
@@ -278,8 +276,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
 
-{\scriptsize First authorship: Kian
-}
+{\scriptsize First authorship: Kian}
 
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $R^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
@@ -303,6 +300,8 @@ where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 \noindent We compared main and main + interaction effects models to determine if the full model had any substantial predictors. 
 \noindent If this was true, then we ran a backward stepwise selection process on the full model, and likewise with the reduced model.
 \noindent As shown in Figure 3, the distribution of the response variable is approximately normal, so a transformation is unnecessary. 
+
+{\scriptsize First authorship: Lauren}
 
 \subsection{Model Summary}
 Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
@@ -340,6 +339,7 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 
 \textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
 
+{\scriptsize First authorship: Lauren}
 
 \begin{thebibliography}{9}
 
