@@ -234,51 +234,16 @@ Since the 1960s model had the highest adjusted $R^2$ value, we will use present 
     \caption*{Figure 1: Summary of 1960's Optimized Model}
 \end{figure}
 
-The summary statistics from the 1960's model reveals that... 
-
-
 \subsection{Model Diagnostics}
-Assess the assumptions of linear regression (linearity, independence, homoscedasticity, normality of residuals). You should include residual plots or QQ-plots here to justify that your model assumptions hold (or discuss how they are violated).
+The figures below are the TA and QQ-plot for our selected optimized model from the 1960s.
+
 \begin{figure}[H]
-    \begin{subfigure}{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{1960s_TA_QQ_Plots.png}
+        \includegraphics[width=0.7\linewidth]{1960s_TA_QQ_Plots.png}
         \caption*{Figure 2: 1960's TA and QQ-Plot}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{1970s_Plots.png}
-        \caption*{Figure 3: 1970's TA and QQ-Plot}
-    \end{subfigure}
-    
-    \vspace{0.3cm}
-    
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{1980s_Plots.png}
-        \caption*{Figure 4: 1980's TA and QQ-Plot}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{1990s_Plots.png}
-        \caption*{Figure 5: 1990's TA and QQ-Plot}
-    \end{subfigure}
-    
-    \vspace{0.3cm}
-    
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{2000s_Plots.png}
-        \caption*{Figure 6: 2000's TA and QQ-Plot}
-    \end{subfigure}
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{2010s_Plots.png}
-        \caption*{Figure 6: 2010's TA and QQ-Plot}
-    \end{subfigure}
 \end{figure}
 
-The figures above represent the TA and QQ-plots for each of the optimized models over the six decades tested. In all of our TA plots, we see that the residuals are mostly around 0. While we noticed a small increase in residuals in the 2000's model, we did not deem it enough to be considered an issue. This is an indicator that the homoscedasticity assumption has been met throughout all the optimized models. With the QQ plots, we noticed that the tails are somewhat short-tailed on both ends for some of our optimized models, specifically for the 2000's and 2010's models. Similarly to what was mentioned for our TA plots, we thought that the normality condition is still met because most of the points on the QQ plots for each decade do not deviate from the reference line. Given the large amount of data and the conditions being met, we thought that it was unnecessary to perform a transformation.
+In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. The TA plot also shows that our observations do not follow a systematic pattern and there are not many notable outliers, justifying homoscedasticity. With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends for our final model. Because of this, we violate the normality assumption. However, since the short tails are without skew on the QQ plot, we believed that transformations were unnecessary for the final model.
 % -------------------------------------------------------------------
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
