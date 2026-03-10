@@ -427,6 +427,29 @@ ggplot(cleaned_data, aes(x = rating)) +
   theme_classic()
 \end{verbatim}
 
+\subsection{Model Interpretations and Assumptions}
+\begin{verbatim}
+
+model_60s <- model_results[["1960s"]]$optimal
+model_70s <- model_results[["1970s"]]$optimal
+model_80s <- model_results[["1980s"]]$optimal
+model_90s <- model_results[["1990s"]]$optimal
+model_2000s <- model_results[["2000s"]]$optimal
+model_2010s <- model_results[["2010s"]]$optimal
+
+summary(model_60s)
+summary(model_70s)
+summary(model_80s)
+summary(model_90s)
+summary(model_2000s)
+summary(model_2010s)
+
+par(mfrow = c(1,3), mar = c(5, 2, 4, 1))
+
+plot(model_60s, which = c(1, 2, 5), main = "1960s")
+
+\end{verbatim}
+
 \subsection{Adjusted $R^2$ Comparison}
 \begin{verbatim}
 summary(model_60s)$adj.r.squared
@@ -460,7 +483,49 @@ ggplot(df, aes(x = Decade, y = Adj_R2)) +
     y = "Adjusted R2"
   ) +
   theme_minimal(base_size = 14)
+  
+  
 \end{verbatim}
 
+\subsection{Presence Matrix}
+\begin{verbatim}
+vars_by_decade <- lapply(model_results, function(x) {
+  attr(terms(x$optimal), "term.labels")
+})
+
+all_vars <- unique(unlist(vars_by_decade))
+
+presence_matrix <- sapply(vars_by_decade, function(vars) {
+  all_vars %in% vars
+})
+
+rownames(presence_matrix) <- all_vars
+presence_matrix
+
+presence_df <- as.data.frame(as.table(presence_matrix))
+
+ggplot(presence_df, aes(x = Var2, y = Var1, fill = Freq)) +
+  geom_tile() +
+  scale_fill_manual(values = c("black","#23DC6D")) +
+  labs(x = "Decade", y = "Variable", fill = "Included") +
+  theme_minimal()
+
+true_counts <- rowSums(presence_matrix)
+true_counts
+
+rownames(presence_matrix)[true_counts == max(true_counts)]
+
+false_counts <- rowSums(!presence_matrix)
+false_counts
+
+rownames(presence_matrix)[false_counts == max(false_counts)]
+
+summary_table <- data.frame(
+  TRUE_count = rowSums(presence_matrix),
+  FALSE_count = rowSums(!presence_matrix)
+)
+
+summary_table[order(-summary_table$TRUE_count), ]
+\end{verbatim}
 
 \end{document}
