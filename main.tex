@@ -294,16 +294,12 @@ Acknowledge the limitations of your study (e.g., potential omitted variable bias
 % -------------------------------------------------------------------
 % Using a simple thebibliography environment for ease of use. 
 % For larger projects, students might prefer BibTeX.
-\begin{thebibliography}{9}
-\bibitem{textbook} 
-Author Name. 
-\textit{Title of the Textbook}. 
-Publisher, Year.
 
 \bibitem{dataset} 
-Dataset Creator. 
-``Title of the Dataset." 
-\textit{Source/URL}, Year.
+Chris Dalla Riva 
+``Billboard Hot 100 Number Ones" 
+
+\textit{https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-08-26}, 2025.
 \end{thebibliography}
 
 % -------------------------------------------------------------------
@@ -319,5 +315,149 @@ model <- lm(Y ~ X1 + X2, data = mydata)
 summary(model)
 plot(model)
 \end{verbatim}
+
+\subsection{Cleaning Data}
+\begin{verbatim}
+orig_data <- read.csv("billboard.csv")
+
+cleaned_data <- data.frame(artist = orig_data$artist, rating = orig_data$overall_rating, 
+  age=orig_data$front_person_age)
+
+cleaned_data$gender <- ifelse(orig_data$artist_male == 1, "Male", "Not Male")
+
+cleaned_data$race <- ifelse(orig_data$artist_white == 1, "White", "Not White")
+
+cleaned_data$genre <- ifelse(is.na(orig_data$cdr_genre), "Genre Not Specified", 
+    orig_data$cdr_genre)
+
+cleaned_data$genre <- ifelse(grepl("Pop", orig_data$cdr_genre), "Pop", 
+                      ifelse(grepl("Country", orig_data$cdr_genre), "Country",
+                      ifelse(grepl("Hip-Hop", orig_data$cdr_genre), "Hip-Hop",
+                      ifelse(grepl("Rock", orig_data$cdr_genre), "Rock",
+                      ifelse(grepl("Jazz", orig_data$cdr_genre), "Jazz", "Other")))))
+
+cleaned_data <- cbind(cleaned_data, bpm=orig_data$bpm, energy=orig_data$energy, 
+                danceability = orig_data$danceability, happiness = orig_data$happiness, 
+                loudness_db = orig_data$loudness_d_b, 
+                length_sec = orig_data$length_sec)
+
+
+cleaned_data$year <- as.numeric(substr(orig_data$date, 1, 
+                    unlist(gregexpr("-", orig_data$date))[1] - 1))
+
+cleaned_data <- cleaned_data[rowSums(is.na(cleaned_data)) == 0 , ]
+\end{verbatim}
+
+\subsection{Finding Optimized Models}
+\begin{verbatim}
+model_results <- list()
+
+
+for(i in seq(1960, 2030, 10)){
+  decade_label <- paste0(i - 10, "s")
+
+  subpop <- cleaned_data[cleaned_data$year >= i - 10 & 
+                          cleaned_data$year < i, ]
+  
+  # --- SAFETY CHECK 1: Ensure enough rows exist ---
+  # If you have < 50 rows, the interaction model will likely fail.
+  if(nrow(subpop) < 50) {
+    message(paste("Skipping", decade_label, "- Not enough data points."))
+    next
+  }
+  
+  factor_counts <- sapply(subpop[, c("genre", "gender", "race")], 
+                  function(x) length(unique(na.omit(x))))
+  
+  if(any(factor_counts < 2)) {
+    message(paste("Skipping", decade_label, "due to single-level factor:", 
+                  names(factor_counts)[factor_counts < 2]))
+    next
+  }
+  
+  first_model <- lm(data = subpop, rating ~ age + race + gender + genre + energy 
+                  + danceability + happiness + bpm + loudness_db + length_sec)
+
+  second_model <- lm(data = subpop, rating ~ age + gender + race + age*genre 
+                + age*energy + age*danceability + age*happiness + age*bpm 
+                + age*loudness_db + age*length_sec + race*genre + race*energy 
+                + race*danceability + race*happiness + race*bpm + race*loudness_db 
+                + race*length_sec + gender*genre + gender*energy + gender*danceability 
+                + gender*happiness + gender*bpm +gender*loudness_db + gender*length_sec)
+  
+
+  if(anova(first_model, second_model)$"Pr(>F)"[2] <= 0.1){
+     optimal_model <<- step(second_model, direction="backward")
+  } else {
+      optimal_model <<- step(first_model, direction="backward")
+  }
+  
+  
+  model_results[[decade_label]] <- list(
+    "first"   = first_model,
+    "second"  = second_model,
+    "optimal" = optimal_model
+  )
+  
+  print(decade_label)
+  summary(first_model)
+  summary(second_model)
+  summary(optimal_model)
+}
+\end{verbatim}
+
+\subsection{Response Analysis}
+\begin{verbatim}
+ggplot(cleaned_data, aes(x = rating)) +
+  geom_histogram(
+    binwidth = 1,
+    boundary = 0.5, 
+    fill = "black",  
+    color = "grey",
+    linewidth = 0.3
+  ) +
+  labs(
+    title = "Histogram of Song Ratings",
+    x = "Rating",
+    y = "Frequency"
+  ) +
+  theme_classic()
+\end{verbatime
+
+\subsection{Adjusted $R^2$ Comparison}
+\begin{verbatim}
+summary(model_60s)$adj.r.squared
+
+summary(model_70s)$adj.r.squared
+
+summary(model_80s)$adj.r.squared
+
+summary(model_90s)$adj.r.squared
+
+summary(model_2000s)$adj.r.squared
+
+summary(model_2010s)$adj.r.squared
+
+library(ggplot2)
+
+df <- data.frame(
+  Decade = factor(c("1960s","1970s","1980s","1990s","2000s","2010s"),
+                  levels = c("2010s","2000s","1990s","1980s","1970s","1960s")),
+  Adj_R2 = c(0.244647, 0.2013403, 0.009698796, 0.2152039, 0.2197517, 0.06362834)
+)
+
+ggplot(df, aes(x = Decade, y = Adj_R2)) +
+  geom_col(fill = "#23DC6D") +
+  geom_text(aes(label = round(Adj_R2,3)), hjust = -0.1, size = 4) +
+  coord_flip() +
+  ylim(0, 0.3) +
+  labs(
+    title = "Adjusted R2 of Song Rating Models by Decade",
+    x = "Decade",
+    y = "Adjusted R2"
+  ) +
+  theme_minimal(base_size = 14)
+\end{verbatim}
+
 
 \end{document}
