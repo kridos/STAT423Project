@@ -52,6 +52,7 @@ while the factors that predict song ratings change over time, they have the pote
 
 \onehalfspacing
  
+{\scriptsize First authorship: }
 % -------------------------------------------------------------------
 \section{Introduction}
 % -------------------------------------------------------------------
@@ -69,6 +70,8 @@ to group similar song eras together, allowing us to understand what characterist
 is vastly different in each generation, it is interesting to see what aspects of music and the artist predict how a song is rated.
 This study shows the historical differences between predictors and how aspects such as trends and race can affect how a song is rated.
 
+
+{\scriptsize First authorship: Kian}
 % -------------------------------------------------------------------
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
@@ -78,6 +81,8 @@ This study shows the historical differences between predictors and how aspects s
 This dataset includes information about every Number 1 song on the Billboard charts from 1958--2025. It was compiled
 by Chris Dalla Riva, who listened to each number one hit song and tracked data related to each song.
 Most of the data comes from facts about the song, Chris's interpretation about the song, or data and ratings from Spotify.
+
+{\scriptsize First authorship: Krish}
 
 \subsection{Variables}
 Let $Y$ denote the overall rating of the song. Our predictors are:
@@ -97,6 +102,8 @@ Let $Y$ denote the overall rating of the song. Our predictors are:
 \item $X_{12}$: BPM: Beats per minute from Spotify 
 \item $X_{13}$: Length\_sec: Length of the song in seconds 
 \end{itemize}
+
+{\scriptsize First authorship: Kian}
 
 
 \subsection{Exploratory Analysis}
@@ -150,6 +157,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \noindent The boxplots displayed similar rating distributions across race and gender, with some variation across genres. 
 \noindent As a result, the data were divided into decades to better understand how these predictors influence song ratings across different musical eras.
 
+{\scriptsize First authorship: Lauren}
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
 % -------------------------------------------------------------------
@@ -226,6 +234,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \label{eq:2010s_model}
 \end{equation}
 
+{\scriptsize First authorship: Krish}
 
 % -------------------------------------------------------------------
 \section{Results and Diagnostics}
@@ -251,6 +260,10 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \end{tabular}
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
+
+{\scriptsize First authorship: Kian
+}
+
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
@@ -267,6 +280,8 @@ Therefore, we fit a multiple linear regression model of the form:
 \end{equation}
 where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
+{\scriptsize First authorship: Krish}
+
 \textbf{Explain how you selected your variables (e.g., stepwise selection, theoretical justification, handling of multicollinearity). If you used transformations (like taking the log of the response), explain why.}
 
 \subsection{Model Summary}
@@ -277,6 +292,8 @@ Since the 1960s model had the highest adjusted $R^2$ value, we will use it as ou
 \includegraphics[width=0.45\textwidth]{1960s_Model.png}
 \caption{Summary of 1960s Optimized Model}
 \end{figure}
+
+{\scriptsize First authorship: Kian}
 
 \subsection{Model Diagnostics}
 
@@ -295,6 +312,8 @@ Because of this, we violate the normality assumption. However, since the short t
 we believed that transformations were unnecessary for the final model. 
 The residuals vs. leverage show that all of our observations have a Cook's distance of under 0.5, meaning that there are not significant enough outliers to perform transformations.
 
+{\scriptsize First authorship: Kian}
+
 % -------------------------------------------------------------------
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
@@ -310,6 +329,8 @@ Chris Dalla Riva.
 \url{https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-08-26}
 
 \end{thebibliography}
+
+{\scriptsize First authorship: Krish}
 
 % -------------------------------------------------------------------
 \newpage
