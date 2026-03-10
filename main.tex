@@ -1,7 +1,7 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 % --- Packages ---
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.7in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{float}
@@ -104,7 +104,7 @@ First, we look at the numeric predictors: energy, danceability, happiness, loudn
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{scatterplots_numeric.png}
+\includegraphics[width=0.7\textwidth]{scatterplots_numeric.png}
 \caption{Scatterplot Matrix for Numeric Predictors}
 \end{figure}
 
@@ -231,6 +231,9 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \section{Results and Diagnostics}
 % -------------------------------------------------------------------
 
+
+
+\subsection{Proposed Model}
 \begin{table}[H]
 \centering
 \begin{tabular}{lr}
@@ -248,9 +251,6 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \end{tabular}
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
-
-\subsection{Proposed Model}
-% Example of a standalone equation
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
@@ -285,7 +285,7 @@ The figures below represent the TA, QQ-plots, and Residuals vs Leverage for our 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{1960s_all_plots.png}
-\caption{TA and QQ Plot for the 1960s Model}
+\caption{TA, QQ, and Residual vs Leverage Plots for the 1960s Model}
 \end{figure}
 
 In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. 
@@ -301,9 +301,6 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 
 \textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
 
-% -------------------------------------------------------------------
-\section*{References}
-% -------------------------------------------------------------------
 
 \begin{thebibliography}{9}
 
