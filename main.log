@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 MAR 2026 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 MAR 2026 12:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -469,7 +469,7 @@ LaTeX Warning: Reference `fig:scatter' on page 3 undefined on input line 120.
 [3]
 
 [4]
-<1960s_Model.png, id=99, 432.61626pt x 513.92pt>
+<1960s_Model.png, id=103, 432.61626pt x 513.92pt>
 File: 1960s_Model.png Graphic file (type png)
 <use 1960s_Model.png>
 Package pdftex.def Info: 1960s_Model.png  used on input line 236.
@@ -477,7 +477,7 @@ Package pdftex.def Info: 1960s_Model.png  used on input line 236.
 
 
 [5]
-<1960s_TA_QQ_Plots.png, id=106, 458.21187pt x 263.98625pt>
+<1960s_TA_QQ_Plots.png, id=110, 458.21187pt x 263.98625pt>
 File: 1960s_TA_QQ_Plots.png Graphic file (type png)
 <use 1960s_TA_QQ_Plots.png>
 Package pdftex.def Info: 1960s_TA_QQ_Plots.png  used on input line 245.
@@ -639,6 +639,19 @@ ness_db + gender*length_sec)[]
 
 
 [10]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 392.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 392.
+
+
 Overfull \hbox (18.07022pt too wide) in paragraph at lines 425--425
 []                  \OT1/cmtt/m/n/12 levels = c("2010s","2000s","1990s","1980s"
 ,"1970s","1960s")),[] 
@@ -664,13 +677,13 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 6962454C5120EDF99E76DE8838F1F8F5;2258.
+(rerunfilecheck)             Checksum: 2DF0F7DA28867117A431DBAC386B60C3;2433.
  ) 
 Here is how much of TeX's memory you used:
- 11809 strings out of 473190
- 185438 string characters out of 5715801
+ 11811 strings out of 473190
+ 185468 string characters out of 5715801
  592890 words of memory out of 5000000
- 34880 multiletter control sequences out of 15000+600000
+ 34881 multiletter control sequences out of 15000+600000
  569715 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,577b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -685,10 +698,10 @@ l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/
 texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/t
 exlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (12 pages, 326850 bytes).
+Output written on main.pdf (12 pages, 326807 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 164 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
- 123 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
 
