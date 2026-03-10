@@ -1,16 +1,17 @@
 \documentclass[12pt]{article}
 
 % --- Packages ---
-\usepackage[margin=1in]{geometry}% Sets standard 1-inch margins
-\usepackage{amsmath,amssymb}% Standard math packages
-\usepackage{graphicx}% Required for inserting images
-\usepackage{float}% Allows precise image placement using [H]
-\usepackage{booktabs}% For professional-looking tables
-\usepackage{hyperref}% Makes references and citations clickable
-\usepackage{setspace}% Allows line spacing adjustments
-\usepackage{caption}% Customizing captions for figures/tables
-\usepackage{xcolor, soul} % Highlighting
-
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor, soul}
+\usepackage{colortbl}
 
 % --- Setup hyperref ---
 \hypersetup{
@@ -35,108 +36,77 @@
 \begin{document}
 
 \maketitle
+
 \begin{abstract}
-\noindent Music is a key part of daily life, yet people's opinions about music have evolved over time. 
-\noindent With factors, such as race, having a different impact on society during each decade, this study focuses on
-\noindent how various factors affect song ratings during different decades. Data from Billboard Hot 100 Number One songs were
-\noindent taken from the 1960s - 2010s and split up to form rating prediction linear models. We compared main effects models
-\noindent with interaction effects models and decided which one would be more viable to optimize. The chosen model for the decade
-\noindent was optimized based on its AIC score to determine which predictors made a significant impact on the model. Comparing the predictors across
-\noindent models revealed that variables such as energy and race were consistently important across most decades. 
-\noindent However, no singular factor was consistent between every decade. Ultimately, the findings demonstrated that 
-\noindent while the factors that predict song ratings change over time, they have the potential to be similar in different time periods.
+Music is a key part of daily life, yet people's opinions about music have evolved over time. 
+With factors such as race having a different impact on society during each decade, this study focuses on
+how various factors affect song ratings during different decades. Data from Billboard Hot 100 Number One songs were
+taken from the 1960s -- 2010s and split up to form rating prediction linear models. We compared main effects models
+with interaction effects models and decided which one would be more viable to optimize. The chosen model for the decade
+was optimized based on its AIC score to determine which predictors made a significant impact on the model. Comparing the predictors across
+models revealed that variables such as energy and race were consistently important across most decades. 
+However, no singular factor was consistent between every decade. Ultimately, the findings demonstrated that 
+while the factors that predict song ratings change over time, they have the potential to be similar in different time periods.
 \end{abstract}
 
-\onehalfspacing % 1.5 spacing makes it easier for grading
+\onehalfspacing
  
 % -------------------------------------------------------------------
 \section{Introduction}
 % -------------------------------------------------------------------
 
-\textbf{Research Questions:} 
+\textbf{Research Questions}
 
 \begin{enumerate}
-    \item What are the most and least optimal predictors over time 
-from 1960-2010? 
-    \item How do the models stay consistent and how do they change?
-    \item How does the predictive power of the predictors change over time and what model has the best?
-    
+\item What are the most and least optimal predictors over time from 1960--2010?
+\item How do the models stay consistent and how do they change?
+\item How does the predictive power of predictors change over time and which model performs best?
 \end{enumerate}
 
-
-
-Our interest in music inspired our group to investgate its distinction over time. This prompted dividing our data into different decades
-to group similar song eras together, allowing us to understand what characteristics truly impact the overall rating. Provided that music
+Our interest in music inspired our group to investigate its distinction over time. This prompted dividing our data into different decades
+to group similar song eras together, allowing us to understand what characteristics truly impact the overall rating. Since music
 is vastly different in each generation, it is interesting to see what aspects of music and the artist predict how a song is rated.
-This study shows the historical differences between predictors and how aspects, such as trends and race can affect how a song is rated.
+This study shows the historical differences between predictors and how aspects such as trends and race can affect how a song is rated.
 
 % -------------------------------------------------------------------
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
 
-\textbf{Data Description:}
+\textbf{Data Description}
 
-\noindent This dataset includes information about every Number 1 song on the Billboard charts from 1958-2025. It was compiled
+This dataset includes information about every Number 1 song on the Billboard charts from 1958--2025. It was compiled
 by Chris Dalla Riva, who listened to each number one hit song and tracked data related to each song.
 Most of the data comes from facts about the song, Chris's interpretation about the song, or data and ratings from Spotify.
-The data helps with determining what factors lead to a specific song being on top of the billboards. It accounts for
-demographic data such as age, gender, and race, as well as looking at specific song statistics, such as energy.
 
 \subsection{Variables}
 
-% Example of an inline equation and bullet points
-\noindent Let $Y$ denote the overall rating of the song. The primary features are:
-\begin{itemize}
-    \item Age: Average age of the artist(s)
-    \item Gender: Gender of the artist(s)
-    \item Race: Race of the artist(s)
-    \item Genre: Type of genre of the song
-    \item Energy: Energy measure from Spotify (0-100) 
-    \item Danceability: Danceability measure from Spotify (0-100) 
-    \item Happiness: Happiness measure from Spotify (0-100)
-    \item Loudness\_db: Loudness measured in decibels from Spotify
-    \item BPM: Beats per minute from Spotify
-    \item Length\_sec: Length of the song in seconds
+Let $Y$ denote the overall rating of the song.
+
+\begin{itemize} 
+\item $X_1$: Age: Average age of the artist(s) 
+\item $X_2$: GenderNotMale: Whether any of the artists aren't male (1 if not male, 0 otherwise) 
+\item $X_3$: RaceWhite: Whether any of the artists are white (1 if white, 0 otherwise) 
+\item $X_4$: GenreJazz: Whether the song is jazz (1 if jazz, 0 otherwise) 
+\item $X_5$: GenreRock: Whether the song is rock (1 if rock, 0 otherwise) 
+\item $X_6$: GenrePop: Whether the song is pop (1 if pop, 0 otherwise) 
+\item $X_7$: GenreOther: Whether the song is a different genre (1 if not rock, pop, jazz or country and 0 otherwise) 
+\item $X_8$: Energy: Energy measure from Spotify (0-100) 
+\item $X_9$: Danceability: Danceability measure from Spotify (0-100) 
+\item $X_{10}$: Happiness: Happiness measure from Spotify (0-100) 
+\item $X_{11}$: Loudness\_db: Loudness measured in decibels from Spotify 
+\item $X_{12}$: BPM: Beats per minute from Spotify 
+\item $X_{13}$: Length\_sec: Length of the song in seconds 
 \end{itemize}
-
-\noindent However, in our models, the predictors are split into:
-
-\begin{itemize}
-    \item $X_1$: Age: Average age of the artist(s)
-    \item $X_2$: GenderNotMale: Whether any of the artists aren't male (1 if not male, 0 otherwise)
-    \item $X_3$: RaceWhite: Whether any of the artists are white (1 if white, 0 otherwise)
-    \item $X_4$: GenreJazz: Whether the song is jazz (1 if jazz, 0 otherwise)
-    \item $X_5$: GenreRock: Whether the song is rock (1 if rock, 0 otherwise)
-    \item $X_6$: GenrePop: Whether the song is pop (1 if pop, 0 otherwise)
-    \item $X_7$: GenreOther: Whether the song is a different genre (1 if not rock, pop, jazz or country and 0 otherwise)
-    \item $X_8$: Energy: Energy measure from Spotify (0-100) 
-    \item $X_9$: Danceability: Danceability measure from Spotify (0-100) 
-    \item $X_{10}$: Happiness: Happiness measure from Spotify (0-100)
-    \item $X_{11}$: Loudness\_db: Loudness measured in decibels from Spotify
-    \item $X_{12}$: BPM: Beats per minute from Spotify
-    \item $X_{13}$: Length\_sec: Length of the song in seconds
-\end{itemize}
-
 
 \subsection{Exploratory Analysis}
-Present initial findings from your EDA. You can reference figures like scatterplots or correlation matrices here (e.g., "As seen in Figure \ref{fig:scatter}...").
 
-First, we looked at the the numeric predictors: energy, danceability, happiness, loudness_db, bpm, length_sec, and age.
+First we looked at the numeric predictors: energy, danceability, happiness, loudness\_db, bpm, length\_sec, and age.
 
-\begin{subfigure}{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{Scatterplots for Numeric Predictors.png}
-        \caption*{Figure 1: Scatterplot Matrix for Numeric Predictors}
-    \end{subfigure}
-
-% Example of inserting a figure
-% \begin{figure}[htbp] 
-%     \centering
-%     \includegraphics[angle=270, width=0.7\textwidth]{IMG_2679.jpeg}
-%     \caption{A descriptive caption explaining the plot.}
-%     \label{fig:scatter} % Use this label to reference the figure in your text
-% \end{figure}
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{scatterplots_numeric.png}
+\caption{Scatterplot Matrix for Numeric Predictors}
+\end{figure}
 
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
@@ -239,76 +209,73 @@ Explain how you selected your variables (e.g., stepwise selection, theoretical j
 % -------------------------------------------------------------------
 
 \begin{table}[H]
-    \centering
-    \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
-    \vspace{0.2cm} % Adds a little space between caption and table
-    \label{tab:results}
-    \begin{tabular}{lrlrr}
-        \toprule
-        \textbf{Decade} & \textbf{Adjusted $R^2$} \\
-        \midrule
-         $1960s$ & $0.245$ \\
-         $1970s$ & $0.201$  \\
-         $1980s$ & $0.01$  \\
-         $1990s$ & $0.215$  \\
-         $2000s$   & $0.22$  \\
-         $2010s$   & $0.064$  \\
-        \bottomrule
-    \end{tabular}
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Decade} & \textbf{Adjusted $R^2$} \\
+\midrule
+\rowcolor{yellow}
+1960s & 0.245 \\
+1970s & 0.201 \\
+1980s & 0.010 \\
+1990s & 0.215 \\
+2000s & 0.220 \\
+2010s & 0.064 \\
+\bottomrule
+\end{tabular}
+\caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
 
-
 \subsection{Model Summary}
-% Example of a professional table
-Since the 1960s model had the highest adjusted $R^2$ value, we will use present the results of that model and use as our final model.
-
-\begin{figure}[H] 
-    \centering
-    \includegraphics[angle=0, width=0.4\textwidth]{1960s_Model.png}
-    \caption*{Figure 1: Summary of 1960's Optimized Model}
-\end{figure}
-
-The summary statistics from the 1960's model reveals that... 
-
-
-\subsection{Model Diagnostics}
-The figures above represent the TA and QQ-plots for our selected optimized model from the 1960s.
+Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
 
 \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.7\linewidth]{1960s_TA_QQ_Plots.png}
-        \caption*{Figure 2: 1960's TA and QQ-Plot}
+\centering
+\includegraphics[width=0.45\textwidth]{1960s_Model.png}
+\caption{Summary of 1960s Optimized Model}
 \end{figure}
 
- In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. Our observations on the TA plot illustrate that the residuals , justifying homoscedasticity. With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends for our final model. Because of this, we violate the normality assumption. However, since the short tails are without skew on the QQ plot, we believed that transformations were unnecessary for the final model.
+\subsection{Model Diagnostics}
+
+The figures below represent the TA, QQ-plots, and Residuals vs Leverage for our selected optimized model from the 1960s
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{1960s_all_plots.png}
+\caption{TA and QQ Plot for the 1960s Model}
+\end{figure}
+
+In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. 
+Our observations on the TA plot illustrate that the residuals, justifying the homoscedasticity assumption. 
+With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends for our final model. 
+Because of this, we violate the normality assumption. However, since the short tails are without skew in the QQ plot, 
+we believed that transformations were unnecessary for the final model. 
+The residuals vs. leverage show that all of our observations have a Cook's distance of under 0.5, meaning that there are not significant enough outliers to perform transformations.
+
 % -------------------------------------------------------------------
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
-Summarize the main takeaways from your model in the context of the original problem. What do the coefficients mean in the real world? 
 
-Acknowledge the limitations of your study (e.g., potential omitted variable bias, non-representative sample) and suggest areas for future work.
-
-
+Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.
 
 % -------------------------------------------------------------------
 \section*{References}
 % -------------------------------------------------------------------
-% Using a simple thebibliography environment for ease of use. 
-% For larger projects, students might prefer BibTeX.
 
-\bibitem{dataset} 
-Chris Dalla Riva 
-``Billboard Hot 100 Number Ones" 
+\begin{thebibliography}{9}
 
-\textit{https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-08-26}, 2025.
+\bibitem{dataset}
+Chris Dalla Riva.
+\textit{Billboard Hot 100 Number Ones}.
+\url{https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-08-26}
+
 \end{thebibliography}
 
 % -------------------------------------------------------------------
 \newpage
 \appendix
-\section{Appendix: R/Python Code}
+\section{Appendix: Code}
 % -------------------------------------------------------------------
-Paste your analysis code here. If you prefer, you can use the \texttt{verbatim} environment to format it as raw text:
 
 \begin{verbatim}
 # Example R Code
