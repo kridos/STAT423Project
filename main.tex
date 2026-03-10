@@ -119,13 +119,13 @@ demographic data such as age, gender, and race, as well as looking at specific s
 \subsection{Exploratory Analysis}
 Present initial findings from your EDA. You can reference figures like scatterplots or correlation matrices here (e.g., "As seen in Figure \ref{fig:scatter}...").
 
-% Example of inserting a figure
-\begin{figure}[htbp] 
-    \centering
-    \includegraphics[angle=270, width=0.7\textwidth]{IMG_2679.jpeg}
-    \caption{A descriptive caption explaining the plot.}
-    \label{fig:scatter} % Use this label to reference the figure in your text
-\end{figure}
+First, we looked at the the numeric predictors: energy, danceability, happiness, loudness_db, bpm, length_sec, and age.
+
+\begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Scatterplots for Numeric Predictors.png}
+        \caption*{Figure 1: Scatterplot Matrix for Numeric Predictors}
+    \end{subfigure}
 
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
@@ -205,7 +205,7 @@ Present initial findings from your EDA. You can reference figures like scatterpl
 
 \subsection{Proposed Model}
 % Example of a standalone equation
-We chose the model that best explained the variability in overall ratings in its decade while still being penalized on complexity (best adjusted $R^2$ value).
+We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
 
