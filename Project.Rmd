@@ -109,7 +109,6 @@ for(i in seq(1960, 2030, 10)){
 ```{r}
 library("GGally")
 ggpairs(data = cleaned_data[,c("energy", "danceability", "happiness", "loudness_db", "bpm", "length_sec", "age")])
-
 ```
 
 ```{r}
