@@ -52,7 +52,7 @@ while the factors that predict song ratings change over time, they have the pote
 
 \onehalfspacing
  
-{\scriptsize First authorship: Krish}
+{\scriptsize First author: Krish}
 % -------------------------------------------------------------------
 \section{Introduction}
 % -------------------------------------------------------------------
@@ -71,7 +71,7 @@ is vastly different in each generation, it is interesting to see what aspects of
 This study shows the historical differences between predictors and how aspects such as trends and race can affect how a song is rated.
 
 
-{\scriptsize First authorship: Kian}
+{\scriptsize First author: Kian}
 % -------------------------------------------------------------------
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
@@ -82,7 +82,7 @@ This dataset includes information about every Number 1 song on the Billboard cha
 by Chris Dalla Riva, who listened to each number one hit song and tracked data related to each song.
 Most of the data comes from facts about the song, Chris's interpretation about the song, or data and ratings from Spotify.
 
-{\scriptsize First authorship: Krish}
+{\scriptsize First author: Krish}
 
 \subsection{Variables}
 Let $Y$ denote the overall rating of the song. Our predictors are:
@@ -103,7 +103,7 @@ Let $Y$ denote the overall rating of the song. Our predictors are:
 \item $X_{13}$: Length\_sec: Length of the song in seconds 
 \end{itemize}
 
-{\scriptsize First authorship: Kian}
+{\scriptsize First author: Kian}
 
 
 \subsection{Exploratory Analysis}
@@ -157,7 +157,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \noindent The boxplots displayed similar rating distributions across race and gender, with some variation across genres. 
 \noindent As a result, the data were divided into decades to better understand how these predictors influence song ratings across different musical eras.
 
-{\scriptsize First authorship: Lauren}
+{\scriptsize First author: Lauren}
 % -------------------------------------------------------------------
 \section{Methodology and Model Building}
 % -------------------------------------------------------------------
@@ -234,7 +234,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \label{eq:2010s_model}
 \end{equation}
 
-{\scriptsize First authorship: Krish}
+{\scriptsize First author: Krish}
 
 % -------------------------------------------------------------------
 \section{Results and Diagnostics}
@@ -254,7 +254,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \noindent Additionally, the table provides insight into the structure of the models and the inconsistency of variable selection across decades.
 \noindent Clearly, the 1960s and 2000s require many predictors, while the other decades rely on a few. 
 
-{\scriptsize First authorship: Lauren}
+{\scriptsize First author: Lauren}
 
 \subsection{Proposed Model}
 
@@ -276,7 +276,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
 
-{\scriptsize First authorship: Kian}
+{\scriptsize First author: Kian}
 
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $R^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
@@ -294,14 +294,14 @@ Therefore, we fit a multiple linear regression model of the form:
 \end{equation}
 where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
-{\scriptsize First authorship: Krish}
+{\scriptsize First author: Krish}
 
 \noindent To narrow our scope, we focused on song characteristics, and artist's traits like age and gender. 
 \noindent We compared main and main + interaction effects models to determine if the full model had any substantial predictors. 
 \noindent If this was true, then we ran a backward stepwise selection process on the full model, and likewise with the reduced model.
 \noindent As shown in Figure 3, the distribution of the response variable is approximately normal, so a transformation is unnecessary. 
 
-{\scriptsize First authorship: Lauren}
+{\scriptsize First author: Lauren}
 
 \subsection{Model Summary}
 Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
@@ -312,7 +312,7 @@ Since the 1960s model had the highest adjusted $R^2$ value, we will use it as ou
 \caption{Summary of 1960s Optimized Model}
 \end{figure}
 
-{\scriptsize First authorship: Kian}
+{\scriptsize First author: Kian}
 
 \subsection{Model Diagnostics}
 
@@ -331,7 +331,7 @@ Because of this, we violate the normality assumption. However, since the short t
 we believed that transformations were unnecessary for the final model. 
 The residuals vs. leverage show that all of our observations have a Cook's distance of under 0.5, meaning that there are not significant enough outliers to perform transformations.
 
-{\scriptsize First authorship: Kian}
+{\scriptsize First author: Kian}
 
 % -------------------------------------------------------------------
 \section{Discussion and Conclusion}
@@ -339,7 +339,7 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 
 \textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
 
-{\scriptsize First authorship: Lauren}
+{\scriptsize First author: Lauren}
 
 \begin{thebibliography}{9}
 
@@ -350,7 +350,7 @@ Chris Dalla Riva.
 
 \end{thebibliography}
 
-{\scriptsize First authorship: Krish}
+{\scriptsize First author: Krish}
 
 % -------------------------------------------------------------------
 \newpage
