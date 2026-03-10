@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 MAR 2026 12:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  10 MAR 2026 12:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -334,34 +334,82 @@ Package caption Info: Standard document class detected.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 20.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/soul/soul.sty
+Package: soul 2023-06-14 v3.1 Permit use of UTF-8 characters in soul (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/soul/soul-ori.sty
+Package: soul-ori 2023-06-14 v3.1 letterspacing/underlining (mf)
+\SOUL@word=\toks26
+\SOUL@lasttoken=\toks27
+\SOUL@syllable=\toks28
+\SOUL@cmds=\toks29
+\SOUL@buffer=\toks30
+\SOUL@token=\toks31
+\SOUL@syllgoal=\dimen186
+\SOUL@syllwidth=\dimen187
+\SOUL@charkern=\dimen188
+\SOUL@hyphkern=\dimen189
+\SOUL@dimen=\dimen190
+\SOUL@dimeni=\dimen191
+\SOUL@minus=\count304
+\SOUL@comma=\count305
+\SOUL@apo=\count306
+\SOUL@grave=\count307
+\SOUL@spaceskip=\skip55
+\SOUL@ttwidth=\dimen192
+\SOUL@uldp=\dimen193
+\SOUL@ulht=\dimen194
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 22.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count304
+\l__color_backend_stack_int=\count308
 \l__pdf_internal_box=\box56
 )
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -399,17 +447,17 @@ LaTeX Font Info:    ... okay on input line 33.
 
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count305
-\scratchdimen=\dimen186
+\scratchcounter=\count309
+\scratchdimen=\dimen195
 \scratchbox=\box57
-\nofMPsegments=\count306
-\nofMParguments=\count307
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count308
-\MPscratchDim=\dimen187
-\MPnumerator=\count309
-\makeMPintoPDFobject=\count310
-\everyMPtoPDFconversion=\toks27
+\nofMPsegments=\count310
+\nofMParguments=\count311
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count312
+\MPscratchDim=\dimen196
+\MPnumerator=\count313
+\makeMPintoPDFobject=\count314
+\everyMPtoPDFconversion=\toks33
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -419,16 +467,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2024/06/23 v1.3e Standard LaTeX Color (DPC)
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package color Info: Driver file: pdftex.def on input line 149.
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 33.
+Package hyperref Info: Link coloring ON on input line 35.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
@@ -436,13 +475,13 @@ Package hyperref Info: Link coloring ON on input line 33.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 36.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 36.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -452,7 +491,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (26.84888pt too wide) in paragraph at lines 72--72
+Overfull \hbox (26.84888pt too wide) in paragraph at lines 74--74
 []\OT1/cmr/bx/n/17.28 Data De-scrip-tion and Ex-ploratory Data Anal-y-sis (EDA)
  
  []
@@ -462,12 +501,12 @@ Overfull \hbox (26.84888pt too wide) in paragraph at lines 72--72
 [2{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }]
 
-LaTeX Warning: Reference `fig:scatter' on page 3 undefined on input line 120.
+LaTeX Warning: Reference `fig:scatter' on page 3 undefined on input line 122.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.123 ...nergy, danceability, happiness, loudness_
+l.124 ...nergy, danceability, happiness, loudness_
                                                   db, bpm, length_sec, and age.
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -475,10 +514,17 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.124 
+l.125 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (123.72923pt too wide) in paragraph at lines 124--125
+[]\OT1/cmr/m/n/12 First, we looked at the the nu-meric pre-dic-tors: en-ergy, d
+ance-abil-ity, hap-pi-ness, loudness$[]\OML/cmm/m/it/12 b; bpm; length[]ec; and
+age:$ 
+ []
 
 
 ! LaTeX Error: Environment subfigure undefined.
@@ -487,7 +533,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.125 \begin{subfigure}
+l.126 \begin{subfigure}
                        {0.45\textwidth}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -496,7 +542,7 @@ or  <return>  to continue without it.
 ! Missing number, treated as zero.
 <to be read again> 
                    }
-l.125 \begin{subfigure}{0.45\textwidth}
+l.126 \begin{subfigure}{0.45\textwidth}
                                        
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
@@ -505,7 +551,7 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    }
-l.125 \begin{subfigure}{0.45\textwidth}
+l.126 \begin{subfigure}{0.45\textwidth}
                                        
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
@@ -518,7 +564,7 @@ two letters. (See Chapter 27 of The TeXbook.)
 File: Scatterplots for Numeric Predictors.png Graphic file (type png)
 <use Scatterplots for Numeric Predictors.png>
 Package pdftex.def Info: Scatterplots for Numeric Predictors.png  used on input
- line 127.
+ line 128.
 (pdftex.def)             Requested size: 469.75502pt x 282.69615pt.
 
 ! Package caption Error: \caption outside float.
@@ -527,7 +573,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.128         \caption
+l.129         \caption
                       *{Figure 1: Scatterplot Matrix for Numeric Predictors}
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -542,15 +588,20 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.129     \end{subfigure}
+l.130     \end{subfigure}
                          
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (41.12457pt too wide) in paragraph at lines 125--139
+Overfull \hbox (41.12457pt too wide) in paragraph at lines 126--131
 []\OT1/cmr/m/n/12 0.45 []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--131
+
  []
 
 
@@ -563,12 +614,12 @@ Overfull \hbox (41.12457pt too wide) in paragraph at lines 125--139
 <1960s_Model.png, id=110, 432.61626pt x 513.92pt>
 File: 1960s_Model.png Graphic file (type png)
 <use 1960s_Model.png>
-Package pdftex.def Info: 1960s_Model.png  used on input line 246.
+Package pdftex.def Info: 1960s_Model.png  used on input line 247.
 (pdftex.def)             Requested size: 432.6152pt x 513.91873pt.
 <1960s_TA_QQ_Plots.png, id=111, 458.21187pt x 263.98625pt>
 File: 1960s_TA_QQ_Plots.png Graphic file (type png)
 <use 1960s_TA_QQ_Plots.png>
-Package pdftex.def Info: 1960s_TA_QQ_Plots.png  used on input line 255.
+Package pdftex.def Info: 1960s_TA_QQ_Plots.png  used on input line 256.
 (pdftex.def)             Requested size: 328.82707pt x 189.45364pt.
 
 
@@ -580,20 +631,20 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.275 \bibitem{dataset}
+l.276 \bibitem{dataset}
                        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 275
+Underfull \hbox (badness 10000) detected at line 276
 [][]
  []
 
 ! Undefined control sequence.
 <argument> \@listctr 
                      
-l.275 \bibitem{dataset}
+l.276 \bibitem{dataset}
                        
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -604,7 +655,7 @@ and I'll forget about whatever was undefined.
 ! You can't use `\relax' after \the.
 <recently read> \c@ 
                     
-l.275 \bibitem{dataset}
+l.276 \bibitem{dataset}
                        
 I'm forgetting what you said and using zero instead.
 
@@ -615,7 +666,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.280 \end{thebibliography}
+l.281 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -624,62 +675,62 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 \end  ...end#1\endcsname \@checkend {#1}\endgroup 
                                                   \UseHook {env/#1/after}\if...
-l.280 \end{thebibliography}
+l.281 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
 
 
 [7 <./1960s_TA_QQ_Plots.png>]
-Overfull \hbox (73.64525pt too wide) in paragraph at lines 326--326
+Overfull \hbox (73.64525pt too wide) in paragraph at lines 327--327
 []\OT1/cmtt/m/n/12 cleaned_data <- data.frame(artist = orig_data$artist, rating
  = orig_data$overall_rating,[] 
  []
 
 
-Overfull \hbox (5.72021pt too wide) in paragraph at lines 326--326
+Overfull \hbox (5.72021pt too wide) in paragraph at lines 327--327
 []\OT1/cmtt/m/n/12 cleaned_data$gender <- ifelse(orig_data$artist_male == 1, "M
 ale", "Not Male")[] 
  []
 
 
-Overfull \hbox (11.89522pt too wide) in paragraph at lines 326--326
+Overfull \hbox (11.89522pt too wide) in paragraph at lines 327--327
 []\OT1/cmtt/m/n/12 cleaned_data$race <- ifelse(orig_data$artist_white == 1, "Wh
 ite", "Not White")[] 
  []
 
 
-Overfull \hbox (18.07022pt too wide) in paragraph at lines 326--326
+Overfull \hbox (18.07022pt too wide) in paragraph at lines 327--327
 []\OT1/cmtt/m/n/12 cleaned_data$genre <- ifelse(is.na(orig_data$cdr_genre), "Ge
 nre Not Specified",[] 
  []
 
 
-Overfull \hbox (11.89522pt too wide) in paragraph at lines 326--326
+Overfull \hbox (11.89522pt too wide) in paragraph at lines 327--327
 []                      \OT1/cmtt/m/n/12 ifelse(grepl("Country", orig_data$cdr_
 genre), "Country",[] 
  []
 
 
-Overfull \hbox (11.89522pt too wide) in paragraph at lines 326--326
+Overfull \hbox (11.89522pt too wide) in paragraph at lines 327--327
 []                      \OT1/cmtt/m/n/12 ifelse(grepl("Hip-Hop", orig_data$cdr_
 genre), "Hip-Hop",[] 
  []
 
 
-Overfull \hbox (55.12024pt too wide) in paragraph at lines 326--326
+Overfull \hbox (55.12024pt too wide) in paragraph at lines 327--327
 []                      \OT1/cmtt/m/n/12 ifelse(grepl("Jazz", orig_data$cdr_gen
 re), "Jazz", "Other")))))[] 
  []
 
 
-Overfull \hbox (18.07022pt too wide) in paragraph at lines 326--326
+Overfull \hbox (18.07022pt too wide) in paragraph at lines 327--327
 []\OT1/cmtt/m/n/12 cleaned_data <- cbind(cleaned_data, bpm=orig_data$bpm, energ
 y=orig_data$energy,[] 
  []
 
 
-Overfull \hbox (67.47025pt too wide) in paragraph at lines 326--326
+Overfull \hbox (67.47025pt too wide) in paragraph at lines 327--327
 []                \OT1/cmtt/m/n/12 danceability = orig_data$danceability, happi
 ness = orig_data$happiness,[] 
  []
@@ -687,19 +738,19 @@ ness = orig_data$happiness,[]
 
 
 [8]
-Overfull \hbox (24.24522pt too wide) in paragraph at lines 384--384
+Overfull \hbox (24.24522pt too wide) in paragraph at lines 385--385
 []  \OT1/cmtt/m/n/12 first_model <- lm(data = subpop, rating ~ age + race + gen
 der + genre + energy[] 
  []
 
 
-Overfull \hbox (11.89522pt too wide) in paragraph at lines 384--384
+Overfull \hbox (11.89522pt too wide) in paragraph at lines 385--385
 []                  \OT1/cmtt/m/n/12 + danceability + happiness + bpm + loudnes
 s_db + length_sec)[] 
  []
 
 
-Overfull \hbox (5.72021pt too wide) in paragraph at lines 384--384
+Overfull \hbox (5.72021pt too wide) in paragraph at lines 385--385
 []                \OT1/cmtt/m/n/12 + age*loudness_db + age*length_sec + race*ge
 nre + race*energy[] 
  []
@@ -707,19 +758,19 @@ nre + race*energy[]
 
 
 [9]
-Overfull \hbox (36.59523pt too wide) in paragraph at lines 384--384
+Overfull \hbox (36.59523pt too wide) in paragraph at lines 385--385
 []                \OT1/cmtt/m/n/12 + race*danceability + race*happiness + race*
 bpm + race*loudness_db[] 
  []
 
 
-Overfull \hbox (61.29524pt too wide) in paragraph at lines 384--384
+Overfull \hbox (61.29524pt too wide) in paragraph at lines 385--385
 []                \OT1/cmtt/m/n/12 + race*length_sec + gender*genre + gender*en
 ergy + gender*danceability[] 
  []
 
 
-Overfull \hbox (73.64525pt too wide) in paragraph at lines 384--384
+Overfull \hbox (73.64525pt too wide) in paragraph at lines 385--385
 []                \OT1/cmtt/m/n/12 + gender*happiness + gender*bpm +gender*loud
 ness_db + gender*length_sec)[] 
  []
@@ -729,24 +780,24 @@ ness_db + gender*length_sec)[]
 [10]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 404.
+(hyperref)                removing `math shift' on input line 405.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 404.
+(hyperref)                removing `superscript' on input line 405.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 404.
+(hyperref)                removing `math shift' on input line 405.
 
 
-Overfull \hbox (18.07022pt too wide) in paragraph at lines 437--437
+Overfull \hbox (18.07022pt too wide) in paragraph at lines 438--438
 []                  \OT1/cmtt/m/n/12 levels = c("2010s","2000s","1990s","1980s"
 ,"1970s","1960s")),[] 
  []
 
 
-Overfull \hbox (24.24522pt too wide) in paragraph at lines 437--437
+Overfull \hbox (24.24522pt too wide) in paragraph at lines 438--438
 []  \OT1/cmtt/m/n/12 Adj_R2 = c(0.244647, 0.2013403, 0.009698796, 0.2152039, 0.
 2197517, 0.06362834)[] 
  []
@@ -768,11 +819,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 2DF0F7DA28867117A431DBAC386B60C3;2433.
  ) 
 Here is how much of TeX's memory you used:
- 11821 strings out of 473190
- 185863 string characters out of 5715801
- 593890 words of memory out of 5000000
- 34891 multiletter control sequences out of 15000+600000
- 569715 words of font info for 77 fonts, out of 8000000 for 9000
+ 12482 strings out of 473190
+ 195391 string characters out of 5715801
+ 611436 words of memory out of 5000000
+ 35538 multiletter control sequences out of 15000+600000
+ 570028 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,577b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -786,7 +837,7 @@ l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/
 texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/t
 exlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (12 pages, 383983 bytes).
+Output written on main.pdf (12 pages, 383602 bytes).
 PDF statistics:
  211 PDF objects out of 1000 (max. 8388607)
  168 compressed objects within 2 object streams
