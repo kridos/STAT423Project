@@ -104,13 +104,11 @@ for(i in seq(1960, 2030, 10)){
   summary(second_model)
   summary(optimal_model)
 }
-
-
 ```
 
 ```{r}
 library("GGally")
-ggpairs(data = cleaned_data[,c("energy", "danceability", "happiness", "loudness_db", "bpm", "length_sec" )])
+ggpairs(data = cleaned_data[,c("energy", "danceability", "happiness", "loudness_db", "bpm", "length_sec", "age")])
 
 ```
 
@@ -134,7 +132,7 @@ for (decade in names(model_results)) {
 }
 ```
 
-## Preliminary Exploration of Data through Visual Analysis
+## Preliminary Exploration of Data through Visual Analysis - Lauren Yee
 
 ### Plots of Individual Relationships
 
@@ -185,7 +183,7 @@ plot_length_sec <- ggplot(cleaned_data, aes(x = length_sec, y = rating)) +
   geom_point(color = "black", size = 1.5) +
   geom_smooth(method = "lm", color = "red", se = F) +
   theme_classic() +
-  ggtitle("Rating vs Song Length(sec)")
+  ggtitle("Rating vs Song Length")
 
 plot_bpm + plot_loudness_db + plot_length_sec
 
@@ -214,7 +212,7 @@ As expected, banding is observed in the scatterplots because the response variab
 ```{r}
 ggplot(cleaned_data, aes(x = rating)) +
   geom_histogram(
-    binwidth = 0.5,
+    binwidth = 1,
     boundary = 0.5, 
     fill = "black",  
     color = "grey",
@@ -247,23 +245,37 @@ model_2010s <- model_results[["2010s"]]$optimal
 
 
 ```{r}
-summary(model_60s)$r.squared
 summary(model_60s)$adj.r.squared
 
-summary(model_70s)$r.squared
 summary(model_70s)$adj.r.squared
 
-summary(model_80s)$r.squared
 summary(model_80s)$adj.r.squared
 
-summary(model_90s)$r.squared
 summary(model_90s)$adj.r.squared
 
-summary(model_2000s)$r.squared
 summary(model_2000s)$adj.r.squared
 
-summary(model_2010s)$r.squared
 summary(model_2010s)$adj.r.squared
+
+library(ggplot2)
+
+df <- data.frame(
+  Decade = factor(c("1960s","1970s","1980s","1990s","2000s","2010s"),
+                  levels = c("2010s","2000s","1990s","1980s","1970s","1960s")),
+  Adj_R2 = c(0.244647, 0.2013403, 0.009698796, 0.2152039, 0.2197517, 0.06362834)
+)
+
+ggplot(df, aes(x = Decade, y = Adj_R2)) +
+  geom_col(fill = "#23DC6D") +
+  geom_text(aes(label = round(Adj_R2,3)), hjust = -0.1, size = 4) +
+  coord_flip() +
+  ylim(0, 0.3) +
+  labs(
+    title = "Adjusted R2 of Song Rating Models by Decade",
+    x = "Decade",
+    y = "Adjusted R2"
+  ) +
+  theme_minimal(base_size = 14)
 ```
 
 
@@ -280,8 +292,6 @@ presence_matrix <- sapply(vars_by_decade, function(vars) {
 
 rownames(presence_matrix) <- all_vars
 presence_matrix
-
-rownames(presence_matrix)[rowSums(presence_matrix) == ncol(presence_matrix)]
 
 presence_df <- as.data.frame(as.table(presence_matrix))
 
