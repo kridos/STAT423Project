@@ -1,7 +1,7 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 % --- Packages ---
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.7in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{float}
@@ -23,6 +23,7 @@
 }
 
 % --- Title Information ---
+
 \title{\textbf{Final Project Report:\\How Music Taste Changes Over Time}}
 \author{
     Lauren Yee\\
@@ -103,7 +104,7 @@ First, we look at the numeric predictors: energy, danceability, happiness, loudn
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{scatterplots_numeric.png}
+\includegraphics[width=0.7\textwidth]{scatterplots_numeric.png}
 \caption{Scatterplot Matrix for Numeric Predictors}
 \end{figure}
 
@@ -230,6 +231,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \section{Results and Diagnostics}
 % -------------------------------------------------------------------
 
+<<<<<<< HEAD
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{Presence Matrix Plot.png}
@@ -244,6 +246,11 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \noindent Additionally, the table provides insight into the structure of the models and the inconsistency of variable selection across decades.
 \nodndent Clearly, the 1960s and 2000s require many predictors, while the other decades rely on a few. 
 
+=======
+
+
+\subsection{Proposed Model}
+>>>>>>> 89e3986b69be2068d2bf2ae16d8e71a5da0aceac
 \begin{table}[H]
 \centering
 \begin{tabular}{lr}
@@ -261,9 +268,6 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \end{tabular}
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
-
-\subsection{Proposed Model}
-% Example of a standalone equation
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $R^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
@@ -301,7 +305,7 @@ The figures below represent the TA, QQ-plots, and Residuals vs Leverage for our 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{1960s_all_plots.png}
-\caption{TA and QQ Plot for the 1960s Model}
+\caption{TA, QQ, and Residual vs Leverage Plots for the 1960s Model}
 \end{figure}
 
 In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. 
@@ -317,9 +321,6 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 
 \textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
 
-% -------------------------------------------------------------------
-\section*{References}
-% -------------------------------------------------------------------
 
 \begin{thebibliography}{9}
 
@@ -426,8 +427,59 @@ for(i in seq(1960, 2030, 10)){
 }
 \end{verbatim}
 
-\subsection{Response Analysis}
+\subsection{Model Interpretations and Assumptions}
 \begin{verbatim}
+
+model_60s <- model_results[["1960s"]]$optimal
+model_70s <- model_results[["1970s"]]$optimal
+model_80s <- model_results[["1980s"]]$optimal
+model_90s <- model_results[["1990s"]]$optimal
+model_2000s <- model_results[["2000s"]]$optimal
+model_2010s <- model_results[["2010s"]]$optimal
+
+summary(model_60s)
+summary(model_70s)
+summary(model_80s)
+summary(model_90s)
+summary(model_2000s)
+summary(model_2010s)
+
+# TA, QQ, and Leverage vs. Residuals Plots
+
+par(mfrow = c(1,3), mar = c(5, 2, 4, 1))
+
+plot(model_60s, which = c(1, 2, 5), main = "1960s")
+
+\end{verbatim}
+
+\subsection{Predictor and Genre C.I Analysis}
+\begin{verbatim}
+library("GGally")
+
+# Scatterplot Matrix
+ggpairs(data = cleaned_data[,c("energy", "danceability", "happiness", "loudness_db", "bpm", "length_sec", "age")])
+
+# Boxplots
+plot_race <- ggplot(cleaned_data, aes(x = race, y = rating, fill = race)) +
+  geom_boxplot() +
+  theme_classic() +
+  ggtitle("Rating vs Race") + 
+  guides(fill = "none")
+
+plot_gender <- ggplot(cleaned_data, aes(x = gender, y = rating, fill = gender)) +
+  geom_boxplot() +
+  theme_classic() +
+  ggtitle("Rating vs Gender") + 
+  guides(fill = "none")
+
+plot_genre <- ggplot(cleaned_data, aes(x = genre, y = rating, fill = genre)) +
+  geom_boxplot() +
+  theme_classic() +
+  ggtitle("Rating vs Genre")
+
+plot_race + plot_gender + plot_genre 
+
+# Rating Histogram
 ggplot(cleaned_data, aes(x = rating)) +
   geom_histogram(
     binwidth = 1,
@@ -442,7 +494,86 @@ ggplot(cleaned_data, aes(x = rating)) +
     y = "Frequency"
   ) +
   theme_classic()
+  
+# Genre Confidence Intervals Per Decade
+  
+library(broom)
+coef_1960s <- tidy(model_60s, conf.int = TRUE) %>% mutate(decade = "1960s")
+coef_1970s <- tidy(model_70s, conf.int = TRUE) %>% mutate(decade = "1970s")
+coef_1980s <- tidy(model_80s, conf.int = TRUE) %>% mutate(decade = "1980s")
+coef_1990s <- tidy(model_90s, conf.int = TRUE) %>% mutate(decade = "1990s")
+coef_2000s <- tidy(model_2000s, conf.int = TRUE) %>% mutate(decade = "2000s")
+coef_2010s <- tidy(model_2010s, conf.int = TRUE) %>% mutate(decade = "2010s")
+
+
+#Appending Data not Represented
+#1960s
+coef_1960s <- rbind(coef_1960s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1960s"))
+
+#1970s
+coef_1970s <- rbind(coef_1970s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1970s"))
+
+#1980s
+coef_1980s <- rbind(coef_1980s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genreOther", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genreJazz", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genreRock", 0, 0, 0, 0, 0, 0, "1980s"))
+coef_1980s <- rbind(coef_1980s, list("genrePop", 0, 0, 0, 0, 0, 0, "1980s"))
+
+#1990s
+coef_1990s <- rbind(coef_1990s, list("genreCountry", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genreOther", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genreJazz", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genreRock", 0, 0, 0, 0, 0, 0, "1990s"))
+coef_1990s <- rbind(coef_1990s, list("genrePop", 0, 0, 0, 0, 0, 0, "1990s"))
+
+
+#2000s
+coef_2000s <- rbind(coef_2000s, list("genreCountry", 0, 0, 0, 0, 0, 0, "2000s"))
+coef_2000s <- rbind(coef_2000s, list("genreJazz", 0, 0, 0, 0, 0, 0, "2000s"))
+
+#2010s
+coef_2010s <- rbind(coef_2010s, list("genreCountry", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genreOther", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genreJazz", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genreRock", 0, 0, 0, 0, 0, 0, "2010s"))
+coef_2010s <- rbind(coef_2010s, list("genrePop", 0, 0, 0, 0, 0, 0, "2010s"))
+
+
+
+
+coef_data <- bind_rows(
+  coef_1960s,
+  coef_1970s,
+  coef_1980s,
+  coef_1990s,
+  coef_2000s,
+  coef_2010s
+)
+
+coef_data <- coef_data %>%
+  filter(term != "(Intercept)") %>%
+  filter(grepl("^genre", term)) %>%
+  mutate(term = gsub("^genre", "", term))
+
+coef_data$term <- factor(
+  coef_data$term,
+  levels = c("Jazz","Pop","Rock","Country","HipHop","Other")
+)
+
+ggplot(coef_data, aes(x = estimate, y = term, color = term)) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high), size = 0.8) +
+  facet_wrap(~ decade) +
+  theme_classic() +
+  labs(
+    title = "Genre Effects on Song Ratings by Decade",
+    x = "Coefficient Estimate",
+    y = "Genre"
+  )
 \end{verbatim}
+
+
 
 \subsection{Adjusted $R^2$ Comparison}
 \begin{verbatim}
@@ -477,7 +608,49 @@ ggplot(df, aes(x = Decade, y = Adj_R2)) +
     y = "Adjusted R2"
   ) +
   theme_minimal(base_size = 14)
+  
+  
 \end{verbatim}
 
+\subsection{Presence Matrix}
+\begin{verbatim}
+vars_by_decade <- lapply(model_results, function(x) {
+  attr(terms(x$optimal), "term.labels")
+})
+
+all_vars <- unique(unlist(vars_by_decade))
+
+presence_matrix <- sapply(vars_by_decade, function(vars) {
+  all_vars %in% vars
+})
+
+rownames(presence_matrix) <- all_vars
+presence_matrix
+
+presence_df <- as.data.frame(as.table(presence_matrix))
+
+ggplot(presence_df, aes(x = Var2, y = Var1, fill = Freq)) +
+  geom_tile() +
+  scale_fill_manual(values = c("black","#23DC6D")) +
+  labs(x = "Decade", y = "Variable", fill = "Included") +
+  theme_minimal()
+
+true_counts <- rowSums(presence_matrix)
+true_counts
+
+rownames(presence_matrix)[true_counts == max(true_counts)]
+
+false_counts <- rowSums(!presence_matrix)
+false_counts
+
+rownames(presence_matrix)[false_counts == max(false_counts)]
+
+summary_table <- data.frame(
+  TRUE_count = rowSums(presence_matrix),
+  FALSE_count = rowSums(!presence_matrix)
+)
+
+summary_table[order(-summary_table$TRUE_count), ]
+\end{verbatim}
 
 \end{document}
