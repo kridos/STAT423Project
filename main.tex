@@ -55,7 +55,7 @@ while the factors that predict song ratings change over time, they have the pote
 \section{Introduction}
 % -------------------------------------------------------------------
 
-\textbf{Research Questions}
+\textbf{\underline{Research Questions}}
 
 \begin{enumerate}
 \item What are the most and least optimal predictors over time from 1960--2010?
@@ -72,7 +72,7 @@ This study shows the historical differences between predictors and how aspects s
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
 
-\textbf{Data Description}
+\textbf{\underline{Data Description}}
 
 This dataset includes information about every Number 1 song on the Billboard charts from 1958--2025. It was compiled
 by Chris Dalla Riva, who listened to each number one hit song and tracked data related to each song.
@@ -184,25 +184,6 @@ First we looked at the numeric predictors: energy, danceability, happiness, loud
 \label{eq:2010s_model}
 \end{equation}
 
-\subsection{Proposed Model}
-% Example of a standalone equation
-We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
-According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
-
-
-Therefore, we fit a multiple linear regression model of the form:
-\begin{equation}
-\begin{aligned}
-    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i4} + \beta_5 X_{i5} \\
-                  & + \beta_6 X_{i6} + \beta_7 X_{i7} + \beta_8 X_{i8} + \beta_9 X_{i9} + \beta_{10} X_{i10} + \beta_{11} X_{i13} \\
-                  & + \beta_{12} (X_{i3}X_{i4}) + \beta_{13} (X_{i3}X_{i7}) + \beta_{14} (X_{i3}X_{i6}) \\
-                  & + \beta_{15} (X_{i3}X_{i8}) + \beta_{16} (X_{i3}X_{i9}) + \beta_{17} (X_{i2}X_{i9}) \\
-                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i
-\end{aligned}
-\end{equation}
-where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
-
-Explain how you selected your variables (e.g., stepwise selection, theoretical justification, handling of multicollinearity). If you used transformations (like taking the log of the response), explain why.
 
 % -------------------------------------------------------------------
 \section{Results and Diagnostics}
@@ -225,6 +206,26 @@ Explain how you selected your variables (e.g., stepwise selection, theoretical j
 \end{tabular}
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
+
+\subsection{Proposed Model}
+% Example of a standalone equation
+We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
+According to the adjusted $r^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
+
+
+Therefore, we fit a multiple linear regression model of the form:
+\begin{equation}
+\begin{aligned}
+    Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i4} + \beta_5 X_{i5} \\
+                  & + \beta_6 X_{i6} + \beta_7 X_{i7} + \beta_8 X_{i8} + \beta_9 X_{i9} + \beta_{10} X_{i10} + \beta_{11} X_{i13} \\
+                  & + \beta_{12} (X_{i3}X_{i4}) + \beta_{13} (X_{i3}X_{i7}) + \beta_{14} (X_{i3}X_{i6}) \\
+                  & + \beta_{15} (X_{i3}X_{i8}) + \beta_{16} (X_{i3}X_{i9}) + \beta_{17} (X_{i2}X_{i9}) \\
+                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i
+\end{aligned}
+\end{equation}
+where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
+
+\textbf{Explain how you selected your variables (e.g., stepwise selection, theoretical justification, handling of multicollinearity). If you used transformations (like taking the log of the response), explain why.}
 
 \subsection{Model Summary}
 Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
@@ -256,7 +257,7 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
 
-Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.
+\textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
 
 % -------------------------------------------------------------------
 \section*{References}
@@ -276,13 +277,6 @@ Chris Dalla Riva.
 \appendix
 \section{Appendix: Code}
 % -------------------------------------------------------------------
-
-\begin{verbatim}
-# Example R Code
-model <- lm(Y ~ X1 + X2, data = mydata)
-summary(model)
-plot(model)
-\end{verbatim}
 
 \subsection{Cleaning Data}
 \begin{verbatim}
