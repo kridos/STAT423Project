@@ -226,10 +226,30 @@ Explain how you selected your variables (e.g., stepwise selection, theoretical j
 % -------------------------------------------------------------------
 \section{Results and Diagnostics}
 % -------------------------------------------------------------------
-Since the 1960s model had the highest adjusted $R^2$ value, we will use present the results of that model and use as our final model.
+
+\begin{table}[H]
+    \centering
+    \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
+    \vspace{0.2cm} % Adds a little space between caption and table
+    \label{tab:results}
+    \begin{tabular}{lrlrr}
+        \toprule
+        \textbf{Decade} & \textbf{Adjusted $R^2$} \\
+        \midrule
+         $1960s$ & $0.245$ \\
+         $1970s$ & $0.201$  \\
+         $1980s$ & $0.01$  \\
+         $1990s$ & $0.215$  \\
+         $2000s$   & $0.22$  \\
+         $2010s$   & $0.064$  \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 
 \subsection{Model Summary}
 % Example of a professional table
+Since the 1960s model had the highest adjusted $R^2$ value, we will use present the results of that model and use as our final model.
 
 \begin{figure}[H] 
     \centering
@@ -237,8 +257,11 @@ Since the 1960s model had the highest adjusted $R^2$ value, we will use present 
     \caption*{Figure 1: Summary of 1960's Optimized Model}
 \end{figure}
 
+The summary statistics from the 1960's model reveals that... 
+
+
 \subsection{Model Diagnostics}
-The figures below are the TA and QQ-plot for our selected optimized model from the 1960s.
+The figures above represent the TA and QQ-plots for our selected optimized model from the 1960s.
 
 \begin{figure}[H]
         \centering
@@ -246,7 +269,7 @@ The figures below are the TA and QQ-plot for our selected optimized model from t
         \caption*{Figure 2: 1960's TA and QQ-Plot}
 \end{figure}
 
-In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. The TA plot also shows that our observations do not follow a systematic pattern and there are not many notable outliers, justifying homoscedasticity. With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends for our final model. Because of this, we violate the normality assumption. However, since the short tails are without skew on the QQ plot, we believed that transformations were unnecessary for the final model.
+ In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. Our observations on the TA plot illustrate that the residuals , justifying homoscedasticity. With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends for our final model. Because of this, we violate the normality assumption. However, since the short tails are without skew on the QQ plot, we believed that transformations were unnecessary for the final model.
 % -------------------------------------------------------------------
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
