@@ -104,8 +104,6 @@ for(i in seq(1960, 2030, 10)){
   summary(second_model)
   summary(optimal_model)
 }
-
-
 ```
 
 ```{r}
