@@ -25,10 +25,11 @@
 % --- Title Information ---
 
 \title{\textbf{Final Project Report:\\How Music Taste Changes Over Time}}
+
 \author{
-    Lauren Yee\\
-    Kian Sharifzadeh\\
-    Krish Doshi\\
+    Lauren Yee, 
+    Kian Sharifzadeh, 
+    Krish Doshi \\
     \vspace{0.3cm}
     \textit{Stats 423: Applied Linear Regression $\&$ ANOVA}
 }
@@ -76,11 +77,9 @@ This study shows the historical differences between predictors and how aspects s
 \section{Data Description and Exploratory Data Analysis (EDA)}
 % -------------------------------------------------------------------
 
-\textbf{\underline{Data Description}}
-
 This dataset includes information about every Number 1 song on the Billboard charts from 1958--2025. It was compiled
-by Chris Dalla Riva, who listened to each number one hit song and tracked data related to each song.
-Most of the data comes from facts about the song, Chris's interpretation about the song, or data and ratings from Spotify.
+by Chris Dalla Riva (singer, songwriter, and data expert), who listened to each number one hit song and tracked data related to each song.
+Most of the data comes from facts about the song, Chris's interpretation of the song, or data and ratings from Spotify.
 
 {\scriptsize First author: Krish}
 
@@ -90,11 +89,11 @@ Let $Y$ denote the overall rating of the song. Our predictors are:
 \begin{itemize} 
 \item $X_1$: Age: Average age of the artist(s) 
 \item $X_2$: GenderNotMale: Whether any of the artists aren't male (1 if not male, 0 otherwise) 
-\item $X_3$: RaceWhite: Whether any of the artists are white (1 if white, 0 otherwise) 
-\item $X_4$: GenreJazz: Whether the song is jazz (1 if jazz, 0 otherwise) 
-\item $X_5$: GenreRock: Whether the song is rock (1 if rock, 0 otherwise) 
-\item $X_6$: GenrePop: Whether the song is pop (1 if pop, 0 otherwise) 
-\item $X_7$: GenreOther: Whether the song is a different genre (1 if not rock, pop, jazz or country and 0 otherwise) 
+\item $X_3$: RaceWhite: If any of the artists are white (1 if white, 0 otherwise) 
+\item $X_4$: GenreJazz: If the song is jazz (1 if jazz, 0 otherwise) 
+\item $X_5$: GenreRock: If the song is rock (1 if rock, 0 otherwise) 
+\item $X_6$: GenrePop: If the song is pop (1 if pop, 0 otherwise) 
+\item $X_7$: GenreOther: If the song genre isn't specified (1 if not specified by other variables and 0 otherwise) 
 \item $X_8$: Energy: Energy measure from Spotify (0-100) 
 \item $X_9$: Danceability: Danceability measure from Spotify (0-100) 
 \item $X_{10}$: Happiness: Happiness measure from Spotify (0-100) 
@@ -107,11 +106,12 @@ Let $Y$ denote the overall rating of the song. Our predictors are:
 
 
 \subsection{Exploratory Analysis}
+\noindent To narrow our scope, we focused on song characteristics, and artist's traits like age and gender. 
 First, we look at the numeric predictors: energy, danceability, happiness, loudness\_db, bpm, length\_sec, and age.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{scatterplots_numeric.png}
+\includegraphics[width=0.6\textwidth]{scatterplots_numeric.png}
 \caption{Scatterplot Matrix for Numeric Predictors}
 \end{figure}
 
@@ -124,7 +124,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{Boxplots of Categorical Predictors.png}
+    \includegraphics[width=0.6\linewidth]{Boxplots of Categorical Predictors.png}
     \caption{Boxplots of Categorical Predictors}
 \end{figure}
 
@@ -133,24 +133,25 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{Histogram.png}
+    \includegraphics[width=0.5\linewidth]{Histogram.png}
     \caption{Histogram of Song Ratings}
 \end{figure}
 
 \noindent Moreover, the overall rating variable is technically discrete, but the distribution is approximately symmetric and unimodal distribution, resembling a normal distribution. 
 \noindent Also, the variable takes on 30 values, which is more fine-grained in comparison to outcomes considered discrete such as binary, for example. 
 \noindent Thus, we treat it as a continuous variable for the purposes of this linear regression.
+\noindent Since the distribution of the response variable is approximately normal, we deemed a transformation as unnecessary. 
 
 \noindent Genre is a main topic of interest as it is one of the most common ways people distingush songs. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{Genre Coeff Plot.png}
+    \includegraphics[width=0.65\linewidth]{Genre Coeff Plot.png}
     \caption{Coefficient Esimates Over Time by Genre}
 \end{figure}
 
-\noindent Although the coefficient estimates in Figure 4 suggest that genre is not a consistently significant predictor of ratings, 
-\noindent we continue exploring this relationship to determine whether particular genres contribute more strongly to song ratings in certain decades. 
+\noindent Although the coefficient estimates in Figure 4 suggest that genre is consistently an insignificant predictor of ratings, 
+\noindent we continue exploring this relationship to determine whether particular genres have a correlation to rating in the dataset. 
 
 \noindent Overall, the exploratory analysis revealed potential multicollinearity among numeric predictors such as energy, happiness, loudness and danceability. 
 \noindent On the other hand, BPM, song length, and age showed relatively weak associations with the remaining predictors. 
@@ -166,12 +167,10 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 \begin{enumerate}
   \item Fit a main effects and interaction effects model to predict the decade's overall song ratings
-  using the variables states above
-  \item Determine whether the interaction effects model included substatial predictors that weren't
-  included in our main effects model by running an anova test and interpretting the p-value (at a signficance
-  level of 0.1)
-  \item If the p-value was significant, then run a backwards step procedure on the interaction effects model
-  to remove insignificant predictors based on the change in AIC per step. Otherwise, run the backwards step
+  \item Determine whether the interaction effects model includes substatial predictors that weren't
+  included in our main effects model by running an anova test at a signficance
+  level of 0.1
+  \item If the p-value is significant, run a backwards step procedure (based on AIC) on the interaction effects model. Otherwise, run the backwards step
   procedure on the main effects model.
   \item Repeat the previous steps for each decade to acquire the optimized models
 \end{enumerate}
@@ -242,7 +241,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{Presence Matrix Plot.png}
+    \includegraphics[width=0.5\linewidth]{Presence Matrix Plot.png}
     \caption{Presence Matrix Table}
 \end{figure}
 
@@ -260,6 +259,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 \begin{table}[H]
 \centering
+\resizebox{0.2\textwidth}{!}{% Scale to 80% of text width
 \begin{tabular}{lr}
 \toprule
 \textbf{Decade} & \textbf{Adjusted $R^2$} \\
@@ -273,6 +273,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 2010s & 0.064 \\
 \bottomrule
 \end{tabular}
+}
 \caption{Adjusted $R^2$ for Each Optimized Model Per Decade}
 \end{table}
 
@@ -281,27 +282,17 @@ Next, we observe the individual relationships of the categorical predictors: rac
 We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
 According to the adjusted $R^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
 
-
-Therefore, we fit a multiple linear regression model of the form:
 \begin{equation}
 \begin{aligned}
     Y_i = \beta_0 & + \beta_1 X_{i1} + \beta_2 X_{i2} + \beta_3 X_{i3} + \beta_4 X_{i4} + \beta_5 X_{i5} \\
                   & + \beta_6 X_{i6} + \beta_7 X_{i7} + \beta_8 X_{i8} + \beta_9 X_{i9} + \beta_{10} X_{i10} + \beta_{11} X_{i13} \\
                   & + \beta_{12} (X_{i3}X_{i4}) + \beta_{13} (X_{i3}X_{i7}) + \beta_{14} (X_{i3}X_{i6}) \\
                   & + \beta_{15} (X_{i3}X_{i8}) + \beta_{16} (X_{i3}X_{i9}) + \beta_{17} (X_{i2}X_{i9}) \\
-                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i
+                  & + \beta_{18} (X_{i2}X_{i10}) + \epsilon_i \qquad \text{where } \epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)
 \end{aligned}
 \end{equation}
-where $\epsilon_i \overset{iid}{\sim} \mathcal{N}(0, \sigma^2)$.
 
 {\scriptsize First author: Krish}
-
-\noindent To narrow our scope, we focused on song characteristics, and artist's traits like age and gender. 
-\noindent We compared main and main + interaction effects models to determine if the full model had any substantial predictors. 
-\noindent If this was true, then we ran a backward stepwise selection process on the full model, and likewise with the reduced model.
-\noindent As shown in Figure 3, the distribution of the response variable is approximately normal, so a transformation is unnecessary. 
-
-{\scriptsize First author: Lauren}
 
 \subsection{Model Summary}
 Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
@@ -320,7 +311,7 @@ The figures below represent the TA, QQ-plots, and Residuals vs Leverage for our 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{1960s_all_plots.png}
+\includegraphics[width=0.6\textwidth]{1960s_all_plots.png}
 \caption{TA, QQ, and Residual vs Leverage Plots for the 1960s Model}
 \end{figure}
 
@@ -337,9 +328,7 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 \section{Discussion and Conclusion}
 % -------------------------------------------------------------------
 
-\textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
-
-\noindent The 1960s model was selected as the proposed model because it retained a meaningful set of predictors and demonstrated reasonable predictive power relative to the other decade models. 
+\noindent The 1960s model was selected as the proposed model because it demonstrated the best adjusted $R^2$. 
 
 \noindent Each coefficient represents the expected change in song rating associated with a one-unit increase in a predictor, holding other variables constant. 
 \noindent Among the predictors, song length shows a positive relationship with rating, suggesting that longer songs tend to receive slightly higher ratings on average. 
@@ -351,7 +340,7 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 \noindent Thus, more data would be better for preventing NAs. In addition, the model most likely would not generalize well to other songs since it is based on number one songs in the 1960s. 
 
 {\scriptsize First author: Lauren}
-
+\vspace{-0.3cm}
 \begin{thebibliography}{9}
 
 \bibitem{dataset}
@@ -361,7 +350,6 @@ Chris Dalla Riva.
 
 \end{thebibliography}
 
-{\scriptsize First author: Krish}
 
 % -------------------------------------------------------------------
 \newpage
