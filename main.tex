@@ -339,6 +339,17 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 
 \textbf{Summarize the main takeaways from your model in the context of the original problem. Discuss coefficient interpretation and study limitations.}
 
+\noindent The 1960s model was selected as the proposed model because it retained a meaningful set of predictors and demonstrated reasonable predictive power relative to the other decade models. 
+
+\noindent Each coefficient represents the expected change in song rating associated with a one-unit increase in a predictor, holding other variables constant. 
+\noindent Among the predictors, song length shows a positive relationship with rating, suggesting that longer songs tend to receive slightly higher ratings on average. 
+\noindent Some genre effects also appear, with the coefficient for the “Other” genre indicating a modest difference relative to the baseline genre. 
+\noindent Several interaction terms are present, suggesting that the effects of certain song characteristics vary depending on artist attributes 
+\noindent such as race or gender. Overall, these coefficients indicate that both song and artist characteristics contribute to variation in song ratings.
+
+\noindent One of the limitations is the low adjusted $R^2$, even with a large number of predictors. Splitting into decades resulted in a smaller dataset for each decade. 
+\noindent Thus, more data would be better for preventing NAs. In addition, the model most likely would not generalize well to other songs since it is based on number one songs in the 1960s. 
+
 {\scriptsize First author: Lauren}
 
 \begin{thebibliography}{9}
