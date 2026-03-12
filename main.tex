@@ -40,15 +40,10 @@
 \maketitle
 
 \begin{abstract}
-Music is a key part of daily life, yet people's opinions about music have evolved over time. 
-With factors such as race having a different impact on society during each decade, this study focuses on
-how various factors affect song ratings during different decades. Data from Billboard Hot 100 Number One songs were
-taken from the 1960s -- 2010s and split up to form rating prediction linear models. We compared main effects models
-with interaction effects models and decided which one would be more viable to optimize. The chosen model for the decade
-was optimized based on its AIC score to determine which predictors made a significant impact on the model. Comparing the predictors across
-models revealed that variables such as energy and race were consistently important across most decades. 
-However, no singular factor was consistent between every decade. Ultimately, the findings demonstrated that 
-while the factors that predict song ratings change over time, they have the potential to be similar in different time periods.
+Music is a key part of daily life, yet musical preferences evolve over time. 
+This study examines how various song and artist characteristics influence ratings of Billboard Hot 100 Number One songs across decades. 
+Data from the 1960s through the 2010s were divided into decade-specific subsets. Before stepwise selection using AIC, the main effects model and model including interaction terms were compared.
+Comparing the optimized models across decades revealed that the predictors of song ratings vary over time, with no single factor remaining consistently significant across all decades.
 \end{abstract}
 
 \onehalfspacing
@@ -66,11 +61,9 @@ while the factors that predict song ratings change over time, they have the pote
 \item How does the predictive power of predictors change over time and which model performs best?
 \end{enumerate}
 
-Our interest in music inspired our group to investigate its distinction over time. This prompted dividing our data into different decades
-to group similar song eras together, allowing us to understand what characteristics truly impact the overall rating. Since music
-is vastly different in each generation, it is interesting to see what aspects of music and the artist predict how a song is rated.
-This study shows the historical differences between predictors and how aspects such as trends and race can affect how a song is rated.
-
+Our interest in music inspired our group to investigate how musical preferences change over time. 
+Across generations, different characteristics of songs and artists may influence how highly a song is rated.
+By comparing these predictors across time periods, this study highlights how trends and artist characteristics, such as race, may influence song ratings.
 
 {\scriptsize First author: Kian}
 % -------------------------------------------------------------------
@@ -128,7 +121,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
     \caption{Boxplots of Categorical Predictors}
 \end{figure}
 
-\noindent Figure 2 shows that song ratings are relatively similar across race and gender groups. 
+\noindent Figure 2 shows that song ratings are fairly similar across race and gender groups. 
 \noindent However, some variation appears across genres, with Jazz and Rock tending to have slightly higher median ratings compared to Pop and Country.
 
 \begin{figure}[H]
@@ -137,10 +130,9 @@ Next, we observe the individual relationships of the categorical predictors: rac
     \caption{Histogram of Song Ratings}
 \end{figure}
 
-\noindent Moreover, the overall rating variable is technically discrete, but the distribution is approximately symmetric and unimodal distribution, resembling a normal distribution. 
-\noindent Also, the variable takes on 30 values, which is more fine-grained in comparison to outcomes considered discrete such as binary, for example. 
-\noindent Thus, we treat it as a continuous variable for the purposes of this linear regression.
-\noindent Since the distribution of the response variable is approximately normal, we deemed a transformation as unnecessary. 
+\noindent Although the overall rating variable is technically discrete, its distribution is approximately symmetric and unimodal. 
+\noindent The variable only takes on 30 possible values, making it relatively fine-grained compared to discrete outcomes such as binary variables. 
+\noindent Therefore, it is reasonable to treat the response as continuous for linear regression, and no transformation of the response was required. 
 
 \noindent Genre is a main topic of interest as it is one of the most common ways people distingush songs. 
 
@@ -315,12 +307,10 @@ The figures below represent the TA, QQ-plots, and Residuals vs Leverage for our 
 \caption{TA, QQ, and Residual vs Leverage Plots for the 1960s Model}
 \end{figure}
 
-In the TA plot, we see that the residuals are mostly around 0, which justifies the zero mean assumption. 
-Our observations on the TA plot illustrate that the residuals, justifying the homoscedasticity assumption. 
-With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends for our final model. 
-Because of this, we violate the normality assumption. However, since the short tails are without skew in the QQ plot, 
-we believed that transformations were unnecessary for the final model. 
-The residuals vs. leverage show that all of our observations have a Cook's distance of under 0.5, meaning that there are not significant enough outliers to perform transformations.
+In the TA plot, the residuals are mostly centered around 0, supporting the zero mean assumption. 
+They also appear randomly scattered, indicating homoscedasticity. With the QQ plot, we noticed that the tails are somewhat short-tailed on both ends. 
+Because of this, we violate the normality assumption. However, we deemed transformations unnecessary since the short tails are without skew.
+The residuals vs. leverage plot shows that all of our observations have a Cook's distance of under 0.5, meaning that the outliers are not influential enough for concern.
 
 {\scriptsize First author: Kian}
 
@@ -329,9 +319,8 @@ The residuals vs. leverage show that all of our observations have a Cook's dista
 % -------------------------------------------------------------------
 
 \noindent The 1960s model was selected as the proposed model because it demonstrated the best adjusted $R^2$. 
-
 \noindent Each coefficient represents the expected change in song rating associated with a one-unit increase in a predictor, holding other variables constant. 
-\noindent Among the predictors, song length shows a positive relationship with rating, suggesting that longer songs tend to receive slightly higher ratings on average. 
+\noindent Among the predictors, song length shows a positive relationship with rating, leading us to believe that longer songs tend to receive slightly higher ratings on average. 
 \noindent Some genre effects also appear, with the coefficient for the “Other” genre indicating a modest difference relative to the baseline genre. 
 \noindent Several interaction terms are present, suggesting that the effects of certain song characteristics vary depending on artist attributes 
 \noindent such as race or gender. Overall, these coefficients indicate that both song and artist characteristics contribute to variation in song ratings.
