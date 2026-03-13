@@ -41,9 +41,9 @@
 
 \begin{abstract}
 Music is a key part of daily life, yet musical preferences evolve over time. 
-This study examines how various song and artist characteristics influence ratings of Billboard Hot 100 Number One songs across decades. 
-Data from the 1960s through the 2010s were divided into decade-specific subsets. Before stepwise selection using AIC, the main effects model and model including interaction terms were compared.
-Comparing the optimized models across decades revealed that the predictors of song ratings vary over time, with no single factor remaining consistently significant across all decades.
+This study examines how various song and artist characteristics influence ratings of Billboard Hot 100 Number One songs. 
+Data from the 1960s through the 2010s were grouped by decade. Before stepwise selection using AIC, the main effects model and model including interaction terms were compared.
+Comparing the optimized models for each decade revealed that the predictors of song ratings vary over time, with no single factor remaining consistently significant across all decades.
 \end{abstract}
 
 \onehalfspacing
@@ -61,9 +61,9 @@ Comparing the optimized models across decades revealed that the predictors of so
 \item How does the predictive power of predictors change over time and which model performs best?
 \end{enumerate}
 
-Our interest in music inspired our group to investigate how musical preferences change over time. 
-Across generations, different characteristics of songs and artists may influence how highly a song is rated.
-By comparing these predictors across time periods, this study highlights how trends and artist characteristics, such as race, may influence song ratings.
+Our interest in music inspired our group to investigate how musical preferences change through time. 
+Different characteristics of songs and artists may influence how highly a song is rated.
+By comparing these predictors across time periods, this study highlights how trends and artist characteristics relate to song ratings.
 
 {\scriptsize First author: Kian}
 % -------------------------------------------------------------------
@@ -73,6 +73,8 @@ By comparing these predictors across time periods, this study highlights how tre
 This dataset includes information about every Number 1 song on the Billboard charts from 1958--2025. It was compiled
 by Chris Dalla Riva (singer, songwriter, and data expert), who listened to each number one hit song and tracked data related to each song.
 Most of the data comes from facts about the song, Chris's interpretation of the song, or data and ratings from Spotify.
+Upon data cleaning, we found missing values among the predictors used in the models, reducing the size of the dataset from 1177 rows to 1154 rows. 
+Missing values occurred in different single-digit counts and were not concentrated in earlier decades such as the 1960s, implying that the missingness was unsystematic.
 
 {\scriptsize First author: Krish}
 
@@ -99,7 +101,7 @@ Let $Y$ denote the overall rating of the song. Our predictors are:
 
 
 \subsection{Exploratory Analysis}
-\noindent To narrow our scope, we focused on song characteristics, and artist's traits like age and gender. 
+\noindent To narrow our scope, we focused on song characteristics and artist's traits. 
 First, we look at the numeric predictors: energy, danceability, happiness, loudness\_db, bpm, length\_sec, and age.
 
 \begin{figure}[H]
@@ -110,7 +112,7 @@ First, we look at the numeric predictors: energy, danceability, happiness, loudn
 
 \noindent In Figure 1, the numeric predictors reveal several moderate correlations among song characteristics. 
 \noindent In particular, energy has a positive correlation with happiness and loudness, and danceability shows a mild association with happiness. 
-\noindent In contrast, predictors such as BPM, song length, and age exhibit relatively weak relationships with the other predictors. 
+\noindent Predictors such as BPM, song length, and age exhibit relatively weak relationships with the others.
 \noindent These observations suggest that some song characteristics may capture similar musical attributes and thus, potential multicollinearity when performing linear regression.
 
 Next, we observe the individual relationships of the categorical predictors: race, gender, and genre. 
@@ -132,7 +134,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 \noindent Although the overall rating variable is technically discrete, its distribution is approximately symmetric and unimodal. 
 \noindent The variable only takes on 30 possible values, making it relatively fine-grained compared to discrete outcomes such as binary variables. 
-\noindent Therefore, it is reasonable to treat the response as continuous for linear regression, and no transformation of the response was required. 
+\noindent Therefore, it is reasonable to treat the response as continuous for linear regression, and no transformation is needed.
 
 \noindent Genre is a main topic of interest as it is one of the most common ways people distingush songs. 
 
@@ -148,7 +150,7 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \noindent Overall, the exploratory analysis revealed potential multicollinearity among numeric predictors such as energy, happiness, loudness and danceability. 
 \noindent On the other hand, BPM, song length, and age showed relatively weak associations with the remaining predictors. 
 \noindent The boxplots displayed similar rating distributions across race and gender, with some variation across genres. 
-\noindent As a result, the data were divided into decades to better understand how these predictors influence song ratings across different musical eras.
+\noindent As a result, the data were divided into decades to better understand how these predictors influence song ratings across different eras.
 
 {\scriptsize First author: Lauren}
 % -------------------------------------------------------------------
@@ -158,13 +160,13 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \textbf{\underline{Model Fitting Procedure}}
 
 \begin{enumerate}
-  \item Fit a main effects and interaction effects model to predict the decade's overall song ratings
-  \item Determine whether the interaction effects model includes substatial predictors that weren't
+  \item Fit a main effects and interaction effects model to predict the decade's overall song ratings.
+  \item Determine whether the interaction effects model includes substantial predictors that were not
   included in our main effects model by running an anova test at a signficance
-  level of 0.1
-  \item If the p-value is significant, run a backwards step procedure (based on AIC) on the interaction effects model. Otherwise, run the backwards step
+  level of 0.1.
+  \item If the p-value is significant, run a backwards step procedure (based on AIC) on the interaction effects model. Otherwise, run the backward step
   procedure on the main effects model.
-  \item Repeat the previous steps for each decade to acquire the optimized models
+  \item Repeat the previous steps for each decade to acquire the optimized models.
 \end{enumerate}
 
 \textbf{\underline{1960s Model}}
@@ -238,9 +240,9 @@ Next, we observe the individual relationships of the categorical predictors: rac
 \end{figure}
 
 \noindent Figure 7 visualizes the inclusion of predictors from each optimized model. The most optimal predictors were
-\noindent energy and happiness, appearing in five out of the six decades. The least optimal predictors were 
+\noindent energy and happiness, occurring in five out of the six decades. The least optimal predictors were 
 \noindent race:energy, loudness\_db, bpm, age:danceability, race:happiness, race:bpm, race:length\_sec, gender:bpm.
-\noindent In other words, the predictors that for only one decade's optimized model were loudness\_db, bpm, and a few interaction terms.
+\noindent In other words, loudness\_db, bpm, and a few interaction terms were predictors for only one decade's optimized model.
 
 \noindent Additionally, the table provides insight into the structure of the models and the inconsistency of variable selection across decades.
 \noindent Clearly, the 1960s and 2000s require many predictors, while the other decades rely on a few. 
@@ -271,8 +273,9 @@ Next, we observe the individual relationships of the categorical predictors: rac
 
 {\scriptsize First author: Kian}
 
-We chose the model that best explained the variability in overall ratings in its decade, while still penalizing complexity (best adjusted $R^2$ value).
-According to the adjusted $R^2$ values, the linear model predicting overall song ratings in the 60s was the best model.
+The adjusted $R^2$ values vary across decades, indicating that predictive power changes over time. 
+Nonetheless, we chose the model that explains the greatest proportion of variability in song ratings, while still penalizing model complexity (highest adjusted $R^2$).
+The linear model predicting overall song ratings in the 60s performed the best.
 
 \begin{equation}
 \begin{aligned}
@@ -287,7 +290,7 @@ According to the adjusted $R^2$ values, the linear model predicting overall song
 {\scriptsize First author: Krish}
 
 \subsection{Model Summary}
-Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model
+Since the 1960s model had the highest adjusted $R^2$ value, we will use it as our final model.
 
 \begin{figure}[H]
 \centering
@@ -298,8 +301,6 @@ Since the 1960s model had the highest adjusted $R^2$ value, we will use it as ou
 {\scriptsize First author: Kian}
 
 \subsection{Model Diagnostics}
-
-The figures below represent the TA, QQ-plots, and Residuals vs Leverage for our selected optimized model from the 1960s
 
 \begin{figure}[H]
 \centering
@@ -321,9 +322,9 @@ The residuals vs. leverage plot shows that all of our observations have a Cook's
 \noindent The 1960s model was selected as the proposed model because it demonstrated the best adjusted $R^2$. 
 \noindent Each coefficient represents the expected change in song rating associated with a one-unit increase in a predictor, holding other variables constant. 
 \noindent Among the predictors, song length shows a positive relationship with rating, leading us to believe that longer songs tend to receive slightly higher ratings on average. 
-\noindent Some genre effects also appear, with the coefficient for the “Other” genre indicating a modest difference relative to the baseline genre. 
+\noindent Some genre effects also appear, with the coefficient for the “Other” genre having a modest difference relative to the baseline genre. 
 \noindent Several interaction terms are present, suggesting that the effects of certain song characteristics vary depending on artist attributes 
-\noindent such as race or gender. Overall, these coefficients indicate that both song and artist characteristics contribute to variation in song ratings.
+\noindent such as race or gender. Overall, both song and artist characteristics contribute to variation in song ratings.
 
 \noindent One of the limitations is the low adjusted $R^2$, even with a large number of predictors. Splitting into decades resulted in a smaller dataset for each decade. 
 \noindent Thus, more data would be better for preventing NAs. In addition, the model most likely would not generalize well to other songs since it is based on number one songs in the 1960s. 
